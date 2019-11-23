@@ -1,0 +1,6 @@
+<div class="page-flex">
+  <app-person-form class="flex-item" [submitText]="'Search'" (personEmitter)="search($event)"></app-person-form>
+  <p class="flex-spacer"></p>
+  <app-paging-rest-table class="flex-item" [pagingRestService]="personService" [columns]="columns">
+  </app-paging-rest-table>
+</div>

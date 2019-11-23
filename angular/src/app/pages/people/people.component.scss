@@ -1,0 +1,13 @@
+.page-flex {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.flex-item {
+  flex: auto;
+}
+
+.flex-spacer {
+  flex: auto;
+}

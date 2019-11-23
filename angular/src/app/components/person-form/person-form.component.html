@@ -1,0 +1,13 @@
+<form [formGroup]="form">
+  <mat-form-field class="full-width">
+    <input formControlName="firstName" matInput placeholder="First Name">
+  </mat-form-field>
+  <mat-form-field class="full-width">
+    <input formControlName="lastName" matInput placeholder="Last Name">
+  </mat-form-field>
+</form>
+<div class="button-group">
+  <button (click)="clear()" class="item" mat-raised-button color="primary">clear</button>
+  <span class="spacer"></span>
+  <button (click)="submit()" type="submit" class="item" mat-raised-button color="primary">{{submitText}}</button>
+</div>

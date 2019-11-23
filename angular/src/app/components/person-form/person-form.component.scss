@@ -1,0 +1,17 @@
+.full-width {
+  width: 100%;
+}
+
+.button-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+}
+
+.item {
+  flex: 9;
+}
+
+.spacer {
+  flex: 1;
+}
