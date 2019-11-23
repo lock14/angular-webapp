@@ -16,9 +16,9 @@ import {MatTableModule} from '@angular/material/table';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {MatSortModule} from '@angular/material/sort';
-import {PagingRestService} from './service/paging-rest.service';
+import {PagingRestService} from './services/paging-rest.service';
 import {Person} from './models/person';
-import {PagingRestTableComponent} from './components/paging-rest-table/paging-rest-table.component';
+import {PagingTableComponent} from './components/paging-table/paging-table.component';
 import {PersonFormComponent} from './components/person-form/person-form.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
@@ -30,7 +30,7 @@ import {PeopleComponent} from './pages/people/people.component';
     AppComponent,
     NavComponent,
     PeopleComponent,
-    PagingRestTableComponent,
+    PagingTableComponent,
     PersonFormComponent
   ],
   imports: [

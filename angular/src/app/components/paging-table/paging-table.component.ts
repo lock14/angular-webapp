@@ -2,19 +2,21 @@ import {AfterViewInit, Component, EventEmitter, Input, OnInit, ViewChild} from '
 import {MatPaginator, MatSort} from '@angular/material';
 import {merge, of} from 'rxjs';
 import {map, switchMap} from 'rxjs/operators';
-import {PagingRestService, SearchCriteria} from '../../service/paging-rest.service';
+import {PagingRestService} from '../../services/paging-rest.service';
 import {Direction} from '../../models/Direction';
 import {Sort} from '@angular/material/sort';
 import {PageEvent} from '@angular/material/paginator';
 import {FieldSort} from '../../models/FieldSort';
+import {SearchCriteria} from '../../models/search-criteria';
+import {PagingService} from '../../services/paging-service';
 
 @Component({
   selector: 'app-paging-rest-table',
-  templateUrl: './paging-rest-table.component.html',
-  styleUrls: ['./paging-rest-table.component.scss']
+  templateUrl: './paging-table.component.html',
+  styleUrls: ['./paging-table.component.scss']
 })
-export class PagingRestTableComponent<T> implements OnInit, AfterViewInit {
-  @Input() pagingRestService: PagingRestService<T> = null;
+export class PagingTableComponent<T> implements OnInit, AfterViewInit {
+  @Input() pagingService: PagingService<T> = null;
   @Input() columns: any[];
   fields: string[];
   totalElements = 0;
@@ -46,7 +48,7 @@ export class PagingRestTableComponent<T> implements OnInit, AfterViewInit {
             if (sort.active && sort.direction) {
               fieldSorts.push({field: this.sort.active, direction: Direction[this.sort.direction]});
             }
-            return this.pagingRestService.findAll({
+            return this.pagingService.findAll({
               page: pageEvent.pageIndex,
               size: pageEvent.pageSize,
               sorts: fieldSorts,

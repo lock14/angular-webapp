@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit, ViewChild} from '@angular/core';
-import {PagingRestService} from '../../service/paging-rest.service';
+import {PagingRestService} from '../../services/paging-rest.service';
 import {Person} from '../../models/person';
-import {PagingRestTableComponent} from '../../components/paging-rest-table/paging-rest-table.component';
+import {PagingTableComponent} from '../../components/paging-table/paging-table.component';
 
 @Component({
   selector: 'app-person',
@@ -14,7 +14,7 @@ export class PeopleComponent implements OnInit {
     {field: 'lastName', header: 'Last Name'},
   ];
 
-  @ViewChild(PagingRestTableComponent, {static: false}) personTable: PagingRestTableComponent<Person>;
+  @ViewChild(PagingTableComponent, {static: false}) personTable: PagingTableComponent<Person>;
 
   constructor(@Inject('personService') readonly personService: PagingRestService<Person>) { }
 
