@@ -10,8 +10,8 @@ import {FormControl, FormGroup} from '@angular/forms';
 export class PersonFormComponent implements OnInit {
   @Input() submitText = 'Submit';
   @Output() personEmitter = new EventEmitter<Person>();
+  form: FormGroup;
 
-  private form: FormGroup;
   constructor() { }
 
   ngOnInit() {

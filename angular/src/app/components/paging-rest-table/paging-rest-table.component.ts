@@ -14,7 +14,7 @@ import {FieldSort} from '../../models/FieldSort';
   styleUrls: ['./paging-rest-table.component.scss']
 })
 export class PagingRestTableComponent<T> implements OnInit, AfterViewInit {
-  @Input() pagingRestService: PagingRestService<T>;
+  @Input() pagingRestService: PagingRestService<T> = null;
   @Input() columns: any[];
   fields: string[];
   totalElements = 0;

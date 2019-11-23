@@ -2,11 +2,7 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {FieldSort} from '../models/FieldSort';
 import {Page} from '../models/page';
 import {Observable} from 'rxjs';
-import {Injectable} from '@angular/core';
 
-@Injectable({
-  providedIn: 'root'
-})
 export class PagingRestService<T> {
 
   constructor(private httpClient: HttpClient, private baseUri) {
@@ -35,12 +31,12 @@ export class PagingRestService<T> {
     return this.httpClient.post<T>(this.baseUri, data);
   }
 
-  public update(id: number, data: T): Observable<T> {
-    return this.httpClient.put<T>(this.baseUri + '/' + id.toString(), data);
+  public update(id: string, data: T): Observable<T> {
+    return this.httpClient.put<T>(this.baseUri + '/' + id, data);
   }
 
-  public delete(id: number): Observable<any> {
-    return this.httpClient.delete(this.baseUri + '/' + id.toString());
+  public delete(id: string): Observable<any> {
+    return this.httpClient.delete(this.baseUri + '/' + id);
   }
 }
 
