@@ -3,7 +3,7 @@ package org.lock14.angularwebapp.service;
 import org.lock14.angularwebapp.domain.Person;
 import org.lock14.angularwebapp.domain.Person_;
 import org.lock14.angularwebapp.repository.PersonRepository;
-import org.lock14.angularwebapp.repository.SpecificationBuilder;
+import org.lock14.angularwebapp.repository.SearchCriterion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -23,14 +23,9 @@ public class PersonService {
     }
 
     public Page<Person> findAll(Set<Long> ids, Set<String> firstNames, Set<String> lastNames, Pageable pageable) {
-        Specification<Person> spec = new SpecificationBuilder<Person>()
-                .with(Person_.id)
-                .in(ids)
-                .with(Person_.firstName)
-                .in(firstNames)
-                .with(Person_.lastName)
-                .in(lastNames)
-                .build();
+        Specification<Person> spec = SearchCriterion.in(Person_.id, ids)
+                                                    .and(SearchCriterion.in(Person_.firstName, firstNames))
+                                                    .and(SearchCriterion.in(Person_.lastName, lastNames));
         return personRepository.findAll(spec, pageable);
     }
 

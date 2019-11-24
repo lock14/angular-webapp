@@ -7,11 +7,10 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.persistence.metamodel.SingularAttribute;
-import java.io.Serializable;
 import java.util.Collection;
 import java.util.Objects;
 
-public abstract class SearchCriterion<T1, T2 extends Serializable> implements Specification<T1> {
+public abstract class SearchCriterion<T1, T2> implements Specification<T1> {
     private final SingularAttribute<T1, T2> field;
     private final Operation operation;
     private final Object value;
@@ -98,29 +97,61 @@ public abstract class SearchCriterion<T1, T2 extends Serializable> implements Sp
         }
     }
 
-    public SearchCriterion(SingularAttribute<T1, T2> field, Operation operation, Object value) {
+    private SearchCriterion(SingularAttribute<T1, T2> field, Operation operation, Object value) {
         this.field = Objects.requireNonNull(field, "key cannot bey null");
         this.operation = Objects.requireNonNull(operation, "operation cannot bey null");
-        this.value = Objects.requireNonNull(value, "value cannot be null");
+        this.value = value;
     }
 
-    public static <T1, T2 extends Serializable>
+    public static <T1, T2> Specification<T1> equalTo(SingularAttribute<T1, T2> field, T2 value) {
+        return of(field, BasicOperation.EQUALS, value);
+    }
+
+    public static <T1, T2>
     Specification<T1> of(SingularAttribute<T1, T2> field, BasicOperation operation, T2 value) {
         return new BasicCriterion<>(field, operation, value);
     }
 
-    public static <T1, T2 extends Serializable>
+    public static <T1, T2> Specification<T1> in(SingularAttribute<T1, T2> field, Collection<T2> values) {
+        return of(field, CollectionOperation.IN, values);
+    }
+
+    public static <T1, T2>
     Specification<T1> of(SingularAttribute<T1, T2> field, CollectionOperation operation, Collection<T2> values) {
         return new CollectionCriterion<>(field, operation, values);
     }
 
-    public static <T1, T2 extends Comparable<? super T2> & Serializable>
+    public static <T1, T2 extends Comparable<? super T2>>
+    Specification<T1> lessThan(SingularAttribute<T1, T2> field, T2 value) {
+        return of(field, ComparableOperation.LESS_THAN, value);
+    }
+
+    public static <T1, T2 extends Comparable<? super T2>>
+    Specification<T1> lessThanOrEqualTo(SingularAttribute<T1, T2> field, T2 value) {
+        return of(field, ComparableOperation.LESS_THAN_OR_EQUAL_TO, value);
+    }
+
+    public static <T1, T2 extends Comparable<? super T2>>
+    Specification<T1> greaterThan(SingularAttribute<T1, T2> field, T2 value) {
+        return of(field, ComparableOperation.GREATER_THAN, value);
+    }
+
+    public static <T1, T2 extends Comparable<? super T2>>
+    Specification<T1> greaterThanOrEqualTo(SingularAttribute<T1, T2> field, T2 value) {
+        return of(field, ComparableOperation.GREATER_THAN_OR_EQUAL_TO, value);
+    }
+
+    public static <T1, T2 extends Comparable<? super T2>>
     Specification<T1> of(SingularAttribute<T1, T2> field, ComparableOperation operation, T2 value) {
         return new ComparableCriterion<>(field, operation, value);
     }
 
-    public static <T1> Specification<T1> of(SingularAttribute<T1, String> field, StringOperation operation,
-                                            String value) {
+    public static <T1> Specification<T1> like(SingularAttribute<T1, String> field, String value) {
+        return of(field, StringOperation.LIKE, value);
+    }
+
+    public static <T1> Specification<T1>
+    of(SingularAttribute<T1, String> field, StringOperation operation, String value) {
         return new StringCriterion<>(field, operation, value);
     }
 
@@ -139,19 +170,19 @@ public abstract class SearchCriterion<T1, T2 extends Serializable> implements Sp
     @Override
     public abstract Predicate toPredicate(Root<T1> root, CriteriaQuery<?> query, CriteriaBuilder builder);
 
-    private static final class BasicCriterion<T1, T2 extends Serializable> extends SearchCriterion<T1, T2> {
+    private static final class BasicCriterion<T1, T2> extends SearchCriterion<T1, T2> {
 
         private BasicOperation operation;
 
-        public BasicCriterion(SingularAttribute<T1, T2> field,
-                              BasicOperation operation, T2 value) {
+        private BasicCriterion(SingularAttribute<T1, T2> field,
+                       BasicOperation operation, T2 value) {
             super(field, operation, value);
             this.operation = operation;
         }
 
         @Override
         public Predicate toPredicate(Root<T1> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
-            if (operation == BasicOperation.EQUALS) {
+            if (operation == BasicOperation.EQUALS && getValue() != null) {
                 return builder.equal(root.get(getField()), getValue());
             }
             return null;
@@ -170,14 +201,14 @@ public abstract class SearchCriterion<T1, T2 extends Serializable> implements Sp
 
         @Override
         public Predicate toPredicate(Root<T1> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
-            if (operation == StringOperation.LIKE) {
+            if (operation == StringOperation.LIKE && getValue() != null) {
                 return builder.like(root.get(getField()), "%" + getValue() + "%");
             }
             return null;
         }
     }
 
-    private static final class CollectionCriterion<T1, T2 extends Serializable> extends SearchCriterion<T1, T2> {
+    private static final class CollectionCriterion<T1, T2> extends SearchCriterion<T1, T2> {
         private final CollectionOperation operation;
 
         private CollectionCriterion(SingularAttribute<T1, T2> field,
@@ -188,14 +219,14 @@ public abstract class SearchCriterion<T1, T2 extends Serializable> implements Sp
 
         @Override
         public Predicate toPredicate(Root<T1> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
-            if (operation == CollectionOperation.IN) {
+            if (operation == CollectionOperation.IN && getValue() != null) {
                 return root.get(getField()).in(getValue());
             }
             return null;
         }
     }
 
-    private static final class ComparableCriterion<T1, T2 extends Comparable<? super T2> & Serializable>
+    private static final class ComparableCriterion<T1, T2 extends Comparable<? super T2>>
             extends SearchCriterion<T1, T2> {
         private ComparableOperation operation;
 
@@ -208,18 +239,21 @@ public abstract class SearchCriterion<T1, T2 extends Serializable> implements Sp
         @Override
         @SuppressWarnings("unchecked")
         public Predicate toPredicate(Root<T1> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
-            switch (operation) {
-                case LESS_THAN:
-                    return builder.lessThan(root.get(getField()), (T2) getValue());
-                case LESS_THAN_OR_EQUAL_TO:
-                    return builder.lessThanOrEqualTo(root.get(getField()), (T2) getValue());
-                case GREATER_THAN:
-                    return builder.greaterThan(root.get(getField()), (T2) getValue());
-                case GREATER_THAN_OR_EQUAL_TO:
-                    return builder.greaterThanOrEqualTo(root.get(getField()), (T2) getValue());
-                default:
-                    return null;
+            if (getValue() != null) {
+                switch (operation) {
+                    case LESS_THAN:
+                        return builder.lessThan(root.get(getField()), (T2) getValue());
+                    case LESS_THAN_OR_EQUAL_TO:
+                        return builder.lessThanOrEqualTo(root.get(getField()), (T2) getValue());
+                    case GREATER_THAN:
+                        return builder.greaterThan(root.get(getField()), (T2) getValue());
+                    case GREATER_THAN_OR_EQUAL_TO:
+                        return builder.greaterThanOrEqualTo(root.get(getField()), (T2) getValue());
+                    default:
+                        return null;
+                }
             }
+            return null;
         }
     }
 
