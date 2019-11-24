@@ -24,11 +24,11 @@ public class PersonService {
 
     public Page<Person> findAll(Set<Long> ids, Set<String> firstNames, Set<String> lastNames, Pageable pageable) {
         Specification<Person> spec = new SpecificationBuilder<Person>()
-                .withField(Person_.id)
+                .with(Person_.id)
                 .in(ids)
-                .withField(Person_.firstName)
+                .with(Person_.firstName)
                 .in(firstNames)
-                .withField(Person_.lastName)
+                .with(Person_.lastName)
                 .in(lastNames)
                 .build();
         return personRepository.findAll(spec, pageable);

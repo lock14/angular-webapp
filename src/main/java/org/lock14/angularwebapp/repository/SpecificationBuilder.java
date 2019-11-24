@@ -16,16 +16,16 @@ public final class SpecificationBuilder<T1> {
     }
 
     public <T2 extends Serializable>
-    BasicFieldCriteriaBuilder<T2> withField(SingularAttribute<T1, T2> field) {
+    BasicFieldCriteriaBuilder<T2> with(SingularAttribute<T1, T2> field) {
         return new BasicFieldCriteriaBuilder<>(field);
     }
 
     public <T2 extends Comparable<? super T2> & Serializable>
-    ComparableFieldCriteriaBuilder<T2> withComparableField(SingularAttribute<T1, T2> field) {
+    ComparableFieldCriteriaBuilder<T2> withComparable(SingularAttribute<T1, T2> field) {
         return new ComparableFieldCriteriaBuilder<>(field);
     }
 
-    public StringFieldCriteriaBuilder withStringField(SingularAttribute<T1, String> field) {
+    public StringFieldCriteriaBuilder withString(SingularAttribute<T1, String> field) {
         return new StringFieldCriteriaBuilder(field);
     }
 
@@ -63,7 +63,7 @@ public final class SpecificationBuilder<T1> {
             }
 
             public <T3 extends Comparable<? super T3> & Serializable>
-            BasicFieldCriteriaBuilder<T3> withField(SingularAttribute<T1, T3> field) {
+            BasicFieldCriteriaBuilder<T3> with(SingularAttribute<T1, T3> field) {
                 Optional<Specification<T1>> spec = BasicFieldCriteriaBuilder.this.fieldCriteria.stream()
                                                                                                .reduce(Specification::and);
                 SpecificationBuilder.this.criteria.add(spec);
@@ -71,14 +71,14 @@ public final class SpecificationBuilder<T1> {
             }
 
             public <T3 extends Comparable<? super T3> & Serializable>
-            ComparableFieldCriteriaBuilder<T3> withComparableField(SingularAttribute<T1, T3> field) {
+            ComparableFieldCriteriaBuilder<T3> withComparable(SingularAttribute<T1, T3> field) {
                 Optional<Specification<T1>> spec = BasicFieldCriteriaBuilder.this.fieldCriteria.stream()
                                                                                                .reduce(Specification::and);
                 SpecificationBuilder.this.criteria.add(spec);
                 return new ComparableFieldCriteriaBuilder<>(field);
             }
 
-            public StringFieldCriteriaBuilder withStringField(SingularAttribute<T1, String> field) {
+            public StringFieldCriteriaBuilder withString(SingularAttribute<T1, String> field) {
                 Optional<Specification<T1>> spec = BasicFieldCriteriaBuilder.this.fieldCriteria.stream()
                                                                                                .reduce(Specification::and);
                 SpecificationBuilder.this.criteria.add(spec);
