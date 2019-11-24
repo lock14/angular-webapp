@@ -10,7 +10,6 @@ import javax.persistence.metamodel.SingularAttribute;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Objects;
-import java.util.Set;
 
 public abstract class SearchCriterion<T1, T2 extends Serializable> implements Specification<T1> {
     private final SingularAttribute<T1, T2> field;
@@ -123,11 +122,6 @@ public abstract class SearchCriterion<T1, T2 extends Serializable> implements Sp
     public static <T1> Specification<T1> of(SingularAttribute<T1, String> field, StringOperation operation,
                                             String value) {
         return new StringCriterion<>(field, operation, value);
-    }
-
-    public static <T1, T2 extends Comparable<? super T2> & Serializable>
-    Specification<T1> of(SingularAttribute<T1, T2> field, Operation operation, Set<T2> value) {
-        return null;
     }
 
     public final SingularAttribute<T1, T2> getField() {
