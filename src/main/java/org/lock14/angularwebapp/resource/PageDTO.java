@@ -1,4 +1,4 @@
-package org.lock14.angularwebapp.domain;
+package org.lock14.angularwebapp.resource;
 
 import org.springframework.data.domain.Page;
 

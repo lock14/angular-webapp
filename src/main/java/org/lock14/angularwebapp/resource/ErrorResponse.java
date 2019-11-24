@@ -1,4 +1,4 @@
-package org.lock14.angularwebapp.domain;
+package org.lock14.angularwebapp.resource;
 
 import java.time.LocalDateTime;
 

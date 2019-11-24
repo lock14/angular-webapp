@@ -1,8 +1,6 @@
 package org.lock14.angularwebapp.resource;
 
-import org.lock14.angularwebapp.domain.PageDTO;
 import org.lock14.angularwebapp.domain.Person;
-import org.lock14.angularwebapp.repository.PersonSearchCriteria;
 import org.lock14.angularwebapp.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -32,29 +30,17 @@ public class PersonController {
         this.personService = personService;
     }
 
-    @GetMapping("/test")
-    public String getTes() {
-        return "It Worked";
-    }
-
     @GetMapping("/people")
     public ResponseEntity<PageDTO<Person>> findAll(
-            @RequestParam(required = false) Set<String> firstName,
-            @RequestParam(required = false) Set<String> lastName,
-            @RequestParam(required = false) String firstNameLike,
-            @RequestParam(required = false) String lastNameLike,
+            @RequestParam(name = "id", required = false) Set<Long> ids,
+            @RequestParam(name = "firstName", required = false) Set<String> firstNames,
+            @RequestParam(name = "lastName", required = false) Set<String> lastNames,
             Pageable pageable) {
-        PersonSearchCriteria criteria = PersonSearchCriteria.builder()
-                                                            .withFirstNames(firstName)
-                                                            .withLastNames(lastName)
-                                                            .withFirstNameLike(firstNameLike)
-                                                            .withLastNameLike(lastNameLike)
-                                                            .build();
-        return ResponseEntity.ok(PageDTO.of(personService.findAll(criteria, pageable)));
+        return ResponseEntity.ok(PageDTO.of(personService.findAll(ids, firstNames, lastNames, pageable)));
     }
 
     @GetMapping("/people/{id}")
-    public ResponseEntity<Person> get(Long id) {
+    public ResponseEntity<Person> get(@PathVariable Long id) {
         return ResponseEntity.ok(personService.findById(id)
                                               .orElseThrow(PersonController::notFoundException));
     }

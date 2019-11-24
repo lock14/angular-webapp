@@ -1,6 +1,5 @@
 package org.lock14.angularwebapp.resource;
 
-import org.lock14.angularwebapp.domain.ErrorResponse;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -33,5 +32,4 @@ public class RestControllerExceptionHandler {
                             .withPath(request.getURI().getPath())
                             .build();
     }
-
 }
