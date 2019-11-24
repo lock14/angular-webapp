@@ -11,6 +11,7 @@ import java.util.Collection;
 import java.util.Objects;
 
 public abstract class SearchCriterion<T1, T2> implements Specification<T1> {
+    private static final String SEARCH_REGEX = "(\\w+)(<|>|<=|>=|~=|=|#)(\\w+|\\[(\\w+,)*(\\w+)?\\]);";
     private final SingularAttribute<T1, T2> field;
     private final Operation operation;
     private final Object value;
@@ -101,6 +102,10 @@ public abstract class SearchCriterion<T1, T2> implements Specification<T1> {
         this.field = Objects.requireNonNull(field, "key cannot bey null");
         this.operation = Objects.requireNonNull(operation, "operation cannot bey null");
         this.value = value;
+    }
+
+    public static <T1, T2> Specification<T1> parse(String criteria) {
+        return null;
     }
 
     public static <T1, T2> Specification<T1> equalTo(SingularAttribute<T1, T2> field, T2 value) {
