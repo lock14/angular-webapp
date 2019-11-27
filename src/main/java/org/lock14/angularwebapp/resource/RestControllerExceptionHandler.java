@@ -1,5 +1,6 @@
 package org.lock14.angularwebapp.resource;
 
+import org.lock14.angularwebapp.api.ApiError;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -13,23 +14,23 @@ import java.time.LocalDateTime;
 public class RestControllerExceptionHandler {
 
     @ExceptionHandler(HttpClientErrorException.class)
-    public ErrorResponse handleHttpClientError(HttpRequest request,
-                                               HttpClientErrorException ex) {
+    public ApiError handleHttpClientError(HttpRequest request,
+                                          HttpClientErrorException ex) {
         return getError(request, ex.getStatusCode(), ex.getResponseBodyAsString());
     }
 
     @ExceptionHandler(HttpServerErrorException.class)
-    public ErrorResponse handleHttpServerError(HttpRequest request,
-                                               HttpServerErrorException ex) {
+    public ApiError handleHttpServerError(HttpRequest request,
+                                          HttpServerErrorException ex) {
         return getError(request, ex.getStatusCode(), ex.getResponseBodyAsString());
     }
 
-    private ErrorResponse getError(HttpRequest request, HttpStatus status, String message) {
-        return ErrorResponse.withTimeStamp(LocalDateTime.now())
-                            .withStatus(status.value())
-                            .withError(status.getReasonPhrase())
-                            .withMessage(message)
-                            .withPath(request.getURI().getPath())
-                            .build();
+    private ApiError getError(HttpRequest request, HttpStatus status, String message) {
+        return ApiError.withTimeStamp(LocalDateTime.now())
+                       .withStatus(status.value())
+                       .withError(status.getReasonPhrase())
+                       .withMessage(message)
+                       .withPath(request.getURI().getPath())
+                       .build();
     }
 }

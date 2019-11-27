@@ -1,6 +1,8 @@
 package org.lock14.angularwebapp.resource;
 
+import org.lock14.angularwebapp.api.ApiPerson;
 import org.lock14.angularwebapp.domain.Person;
+import org.lock14.angularwebapp.api.ApiPage;
 import org.lock14.angularwebapp.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -31,27 +33,27 @@ public class PersonController {
     }
 
     @GetMapping("/people")
-    public ResponseEntity<PageDTO<Person>> findAll(
+    public ResponseEntity<ApiPage<ApiPerson>> findAll(
             @RequestParam(name = "id", required = false) Set<Long> ids,
             @RequestParam(name = "firstName", required = false) Set<String> firstNames,
             @RequestParam(name = "lastName", required = false) Set<String> lastNames,
             Pageable pageable) {
-        return ResponseEntity.ok(PageDTO.of(personService.findAll(ids, firstNames, lastNames, pageable)));
+        return ResponseEntity.ok(ApiPage.of(personService.findAll(ids, firstNames, lastNames, pageable)));
     }
 
     @GetMapping("/people/{id}")
-    public ResponseEntity<Person> get(@PathVariable Long id) {
+    public ResponseEntity<ApiPerson> get(@PathVariable Long id) {
         return ResponseEntity.ok(personService.findById(id)
                                               .orElseThrow(PersonController::notFoundException));
     }
 
     @PostMapping("/people")
-    public ResponseEntity<Person> create(@Valid @RequestBody Person person) {
+    public ResponseEntity<ApiPerson> create(@Valid @RequestBody ApiPerson person) {
         return ResponseEntity.status(HttpStatus.CREATED).body(this.personService.save(person));
     }
 
     @PutMapping("/people/{id}")
-    public ResponseEntity<Person> update(@PathVariable Long id, @Valid @RequestBody Person person) {
+    public ResponseEntity<ApiPerson> update(@PathVariable Long id, @Valid @RequestBody ApiPerson person) {
         return ResponseEntity.ok(
                 this.personService.save(this.personService.findById(id)
                                                           .map(p -> p.setFirstName(person.getFirstName()))
@@ -61,7 +63,7 @@ public class PersonController {
     }
 
     @DeleteMapping("/people/{id}")
-    public ResponseEntity<?> delete(@PathVariable Long id) {
+    public ResponseEntity<Object> delete(@PathVariable Long id) {
         personService.deleteById(id);
         return ResponseEntity.noContent().build();
     }

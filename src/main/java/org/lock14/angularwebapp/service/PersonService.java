@@ -1,9 +1,10 @@
 package org.lock14.angularwebapp.service;
 
+import org.lock14.angularwebapp.api.ApiPerson;
 import org.lock14.angularwebapp.domain.Person;
 import org.lock14.angularwebapp.domain.Person_;
-import org.lock14.angularwebapp.repository.PersonRepository;
 import org.lock14.angularwebapp.repository.SearchCriterion;
+import org.lock14.angularwebapp.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,22 +23,25 @@ public class PersonService {
         this.personRepository = personRepository;
     }
 
-    public Page<Person> findAll(Set<Long> ids, Set<String> firstNames, Set<String> lastNames, Pageable pageable) {
+    public Page<ApiPerson> findAll(Set<Long> ids, Set<String> firstNames, Set<String> lastNames, Pageable pageable) {
         Specification<Person> spec = SearchCriterion.in(Person_.id, ids)
                                                     .and(SearchCriterion.in(Person_.firstName, firstNames))
                                                     .and(SearchCriterion.in(Person_.lastName, lastNames));
-        return personRepository.findAll(spec, pageable);
+        return personRepository.findAll(spec, pageable)
+                               .map(Person::toApi);
     }
 
-    public Person save(Person person) {
-        return personRepository.save(person);
+    public Optional<ApiPerson> findById(Long id) {
+        return personRepository.findById(id)
+                               .map(Person::toApi);
+    }
+
+    public ApiPerson save(ApiPerson person) {
+        return personRepository.save(Person.fromApi(person))
+                               .toApi();
     }
 
     public void deleteById(Long id) {
         personRepository.deleteById(id);
-    }
-
-    public Optional<Person> findById(Long id) {
-        return personRepository.findById(id);
     }
 }

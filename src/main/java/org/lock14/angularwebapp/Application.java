@@ -18,7 +18,7 @@ public class Application {
     public static void main(String[] args) throws IOException {
         ConfigurableApplicationContext context = SpringApplication.run(Application.class, args);
         PersonRepository personRepository = context.getBean(PersonRepository.class);
-        ClassPathResource resource = new ClassPathResource("names.json");
+        ClassPathResource resource = new ClassPathResource("person.json");
         ObjectMapper mapper = new ObjectMapper();
         List<Person> people = Arrays.asList(mapper.readValue(resource.getInputStream(), Person[].class));
         personRepository.saveAll(people);
