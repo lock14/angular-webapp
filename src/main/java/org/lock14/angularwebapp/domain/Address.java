@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 @Entity
-public class Address {
+public class Address implements ApiConvertibleEntity<Address, ApiAddress> {
     @Id
     @GeneratedValue
     private Long id;

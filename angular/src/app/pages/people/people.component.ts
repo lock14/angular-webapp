@@ -10,6 +10,7 @@ import {PagingTableComponent} from '../../components/paging-table/paging-table.c
 })
 export class PeopleComponent implements OnInit {
   readonly columns = [
+    {field: 'id', header: 'ID'},
     {field: 'firstName', header: 'First Name'},
     {field: 'lastName', header: 'Last Name'},
   ];

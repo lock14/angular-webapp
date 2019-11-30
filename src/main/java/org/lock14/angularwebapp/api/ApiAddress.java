@@ -3,7 +3,7 @@ package org.lock14.angularwebapp.api;
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
-public class ApiAddress {
+public class ApiAddress implements ApiCopyable<ApiAddress> {
     private Long id;
 
     @NotNull
@@ -105,5 +105,15 @@ public class ApiAddress {
                ", zipCode=" + zipCode +
                ", personId=" + personId +
                '}';
+    }
+
+    @Override
+    public ApiAddress copy(ApiAddress from) {
+        this.setStreetAddress(from.getStreetAddress());
+        this.setCity(from.getCity());
+        this.setState(from.getState());
+        this.setZipCode(from.getZipCode());
+        this.setPersonId(from.getPersonId());
+        return this;
     }
 }

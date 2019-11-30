@@ -8,9 +8,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
+import java.util.function.Function;
 
 @Entity
-public class Person {
+public class Person implements ApiConvertibleEntity<Person, ApiPerson> {
+    public static final String[] FIELDS = {"id", "firstName", "lastName"};
+
     private Long id;
 
     @NotNull

@@ -21,6 +21,11 @@ public final class SearchCriterion {
         return (root, query, builder) -> values == null || values.isEmpty() ? null : root.get(field).in(values);
     }
 
+    public static <T1>
+    Specification<T1> in(String field, Collection<String> values) {
+        return (root, query, builder) -> values == null || values.isEmpty() ? null : root.get(field).in(values);
+    }
+
     public static <T1, T2 extends Comparable<? super T2>>
     Specification<T1> lessThan(SingularAttribute<T1, T2> field, T2 value) {
         return (root, query, builder) -> value == null ? null : builder.lessThan(root.get(field), value);

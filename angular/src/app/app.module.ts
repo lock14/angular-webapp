@@ -24,6 +24,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {ReactiveFormsModule} from '@angular/forms';
 import {PeopleComponent} from './pages/people/people.component';
+import {Address} from './models/address';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,11 @@ import {PeopleComponent} from './pages/people/people.component';
       provide: 'personService',
       deps: [HttpClient],
       useFactory: httpClient => new PagingRestService<Person>(httpClient, 'api/people')
+    },
+    {
+      provide: 'addressService',
+      deps: [HttpClient],
+      useFactory: httpClient => new PagingRestService<Address>(httpClient, 'api/addresses')
     }
   ],
   bootstrap: [AppComponent]

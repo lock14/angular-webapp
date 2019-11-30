@@ -19,52 +19,14 @@ import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 
+import static org.lock14.angularwebapp.AppConstants.API_URI;
+
 @RestController
-@RequestMapping("/api")
-public class AddressController {
-    private AddressService addressService;
+@RequestMapping(API_URI + "/addresses")
+public class AddressController extends PagingRestController<ApiAddress, Long> {
 
     @Autowired
     public AddressController(AddressService addressService) {
-        this.addressService = addressService;
-    }
-
-    @GetMapping("/addresses")
-    public ResponseEntity<ApiPage<ApiAddress>> findAll(Pageable pageable) {
-        return ResponseEntity.ok(ApiPage.of(addressService.findAll(pageable)));
-    }
-
-    @GetMapping("/addresses/{id}")
-    public ResponseEntity<ApiAddress> get(@PathVariable Long id) {
-        return ResponseEntity.ok(addressService.findById(id)
-                                               .orElseThrow(AddressController::notFoundException));
-    }
-
-    @PostMapping("/addresses")
-    public ResponseEntity<ApiAddress> create(@Valid @RequestBody ApiAddress address) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(this.addressService.save(address));
-    }
-
-    @PutMapping("/addresses/{id}")
-    public ResponseEntity<ApiAddress> update(@PathVariable Long id, @Valid @RequestBody ApiAddress address) {
-        return ResponseEntity.ok(
-                this.addressService.save(this.addressService.findById(id)
-                                                            .map(a -> a.setStreetAddress(address.getStreetAddress()))
-                                                            .map(a -> a.setCity(address.getCity()))
-                                                            .map(a -> a.setState(address.getState()))
-                                                            .map(a -> a.setZipCode(address.getZipCode()))
-                                                            .map(a -> a.setPersonId(address.getPersonId()))
-                                                            .orElseThrow(AddressController::notFoundException))
-        );
-    }
-
-    @DeleteMapping("/addresses/{id}")
-    public ResponseEntity<Object> delete(@PathVariable Long id) {
-        addressService.deleteById(id);
-        return ResponseEntity.noContent().build();
-    }
-
-    private static ResponseStatusException notFoundException() {
-        return new ResponseStatusException(HttpStatus.NOT_FOUND, "No Such Address");
+        super(addressService);
     }
 }

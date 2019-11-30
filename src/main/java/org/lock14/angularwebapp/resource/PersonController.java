@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,55 +21,19 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
+import static org.lock14.angularwebapp.AppConstants.API_URI;
+
 @RestController
-@RequestMapping("/api")
-public class PersonController {
-    private PersonService personService;
+@RequestMapping(API_URI + "/people")
+public class PersonController extends PagingRestController<ApiPerson, Long> {
 
     @Autowired
     public PersonController(PersonService personService) {
-        this.personService = personService;
-    }
-
-    @GetMapping("/people")
-    public ResponseEntity<ApiPage<ApiPerson>> findAll(
-            @RequestParam(name = "id", required = false) Set<Long> ids,
-            @RequestParam(name = "firstName", required = false) Set<String> firstNames,
-            @RequestParam(name = "lastName", required = false) Set<String> lastNames,
-            Pageable pageable) {
-        return ResponseEntity.ok(ApiPage.of(personService.findAll(ids, firstNames, lastNames, pageable)));
-    }
-
-    @GetMapping("/people/{id}")
-    public ResponseEntity<ApiPerson> get(@PathVariable Long id) {
-        return ResponseEntity.ok(personService.findById(id)
-                                              .orElseThrow(PersonController::notFoundException));
-    }
-
-    @PostMapping("/people")
-    public ResponseEntity<ApiPerson> create(@Valid @RequestBody ApiPerson person) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(this.personService.save(person));
-    }
-
-    @PutMapping("/people/{id}")
-    public ResponseEntity<ApiPerson> update(@PathVariable Long id, @Valid @RequestBody ApiPerson person) {
-        return ResponseEntity.ok(
-                this.personService.save(this.personService.findById(id)
-                                                          .map(p -> p.setFirstName(person.getFirstName()))
-                                                          .map(p -> p.setLastName(person.getLastName()))
-                                                          .orElseThrow(PersonController::notFoundException))
-        );
-    }
-
-    @DeleteMapping("/people/{id}")
-    public ResponseEntity<Object> delete(@PathVariable Long id) {
-        personService.deleteById(id);
-        return ResponseEntity.noContent().build();
-    }
-
-    private static ResponseStatusException notFoundException() {
-        return new ResponseStatusException(HttpStatus.NOT_FOUND, "No Such Person");
+        super(personService);
     }
 }

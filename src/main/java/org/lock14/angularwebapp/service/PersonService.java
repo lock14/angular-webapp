@@ -10,38 +10,24 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.util.MultiValueMap;
 
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
-public class PersonService {
-    private PersonRepository personRepository;
+public class PersonService extends ApiConverterService<PersonRepository, ApiPerson, Person, Long> {
 
     @Autowired
     public PersonService(PersonRepository personRepository) {
-        this.personRepository = personRepository;
+        super(personRepository, Person::fromApi);
     }
 
-    public Page<ApiPerson> findAll(Set<Long> ids, Set<String> firstNames, Set<String> lastNames, Pageable pageable) {
-        Specification<Person> spec = SearchCriterion.in(Person_.id, ids)
-                                                    .and(SearchCriterion.in(Person_.firstName, firstNames))
-                                                    .and(SearchCriterion.in(Person_.lastName, lastNames));
-        return personRepository.findAll(spec, pageable)
-                               .map(Person::toApi);
-    }
-
-    public Optional<ApiPerson> findById(Long id) {
-        return personRepository.findById(id)
-                               .map(Person::toApi);
-    }
-
-    public ApiPerson save(ApiPerson person) {
-        return personRepository.save(Person.fromApi(person))
-                               .toApi();
-    }
-
-    public void deleteById(Long id) {
-        personRepository.deleteById(id);
+    @Override
+    public Specification<Person> toSpecification(MultiValueMap<String, String> filters) {
+        return SearchCriterion.<Person>in(Person_.ID, filters.get(Person_.ID))
+                              .and(SearchCriterion.in(Person_.FIRST_NAME, filters.get(Person_.FIRST_NAME)))
+                              .and(SearchCriterion.in(Person_.LAST_NAME, filters.get(Person_.LAST_NAME)));
     }
 }
