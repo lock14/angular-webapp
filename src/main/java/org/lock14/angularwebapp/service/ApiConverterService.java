@@ -1,6 +1,8 @@
 package org.lock14.angularwebapp.service;
 
 import org.lock14.angularwebapp.domain.ApiConvertibleEntity;
+import org.lock14.angularwebapp.domain.Person;
+import org.lock14.angularwebapp.repository.SearchCriterion;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -8,6 +10,8 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.util.MultiValueMap;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
 
@@ -17,10 +21,13 @@ public abstract class ApiConverterService<Repo extends PagingAndSortingRepositor
 
     private Repo repository;
     private Function<ApiResource, Entity> fromApi;
+    protected Map<String, String> apiFieldsToEntityFields;
 
     ApiConverterService(Repo repository, Function<ApiResource, Entity> fromApi) {
         this.repository = repository;
         this.fromApi = fromApi;
+        this.apiFieldsToEntityFields = new HashMap<>();
+        initFieldMap();
     }
 
     @Override
@@ -46,7 +53,16 @@ public abstract class ApiConverterService<Repo extends PagingAndSortingRepositor
         repository.deleteById(id);
     }
 
-    public Specification<Entity> toSpecification(MultiValueMap<String, String> filters) {
-        return null;
+    protected Specification<Entity> toSpecification(MultiValueMap<String, String> filters) {
+        return apiFieldsToEntityFields.entrySet()
+                                      .stream()
+                                      .map(entry -> SearchCriterion.<Entity>in(entry.getValue(),
+                                                                               filters.get(entry.getKey())))
+                                      .reduce(Specification::and)
+                                      .orElse(null);
     }
+
+    protected void initFieldMap() {
+        // no op
+    };
 }

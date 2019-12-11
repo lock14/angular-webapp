@@ -9,7 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
-import java.util.Objects;
 
 @Entity
 public class Address implements ApiConvertibleEntity<Address, ApiAddress> {
@@ -26,13 +25,12 @@ public class Address implements ApiConvertibleEntity<Address, ApiAddress> {
     private String city;
 
     @NotNull
-
-    @Column(nullable = false)
-    private String state;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private State state;
 
     @NotNull
     @Column(nullable = false)
-    private Integer zipCode;
+    private String zipCode;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Person person;
@@ -64,20 +62,20 @@ public class Address implements ApiConvertibleEntity<Address, ApiAddress> {
         return this;
     }
 
-    public String getState() {
+    public State getState() {
         return state;
     }
 
-    public Address setState(String state) {
+    public Address setState(State state) {
         this.state = state;
         return this;
     }
 
-    public Integer getZipCode() {
+    public String getZipCode() {
         return zipCode;
     }
 
-    public Address setZipCode(Integer zipCode) {
+    public Address setZipCode(String zipCode) {
         this.zipCode = zipCode;
         return this;
     }
@@ -96,51 +94,19 @@ public class Address implements ApiConvertibleEntity<Address, ApiAddress> {
                 .setId(apiAddress.getId())
                 .setStreetAddress(apiAddress.getStreetAddress())
                 .setCity(apiAddress.getCity())
-                .setState(apiAddress.getState())
+                .setState(new State().setCode(apiAddress.getState()))
                 .setZipCode(apiAddress.getZipCode())
                 .setPerson(new Person().setId(apiAddress.getId()));
     }
 
     public ApiAddress toApi() {
-        return new ApiAddress()
-                .setId(getId())
-                .setStreetAddress(getStreetAddress())
-                .setCity(getCity())
-                .setState(getState())
-                .setZipCode(getZipCode())
-                .setPersonId(getPerson().getId());
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof Address)) {
-            return false;
-        }
-        Address address = (Address) o;
-        return Objects.equals(getStreetAddress(), address.getStreetAddress()) &&
-               Objects.equals(getCity(), address.getCity()) &&
-               Objects.equals(getState(), address.getState()) &&
-               Objects.equals(getZipCode(), address.getZipCode()) &&
-               Objects.equals(getPerson(), address.getPerson());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getStreetAddress(), getCity(), getState(), getZipCode(), getPerson());
-    }
-
-    @Override
-    public String toString() {
-        return "Address{" +
-               "id=" + id +
-               ", streetAddress='" + streetAddress + '\'' +
-               ", city='" + city + '\'' +
-               ", state='" + state + '\'' +
-               ", zipCode=" + zipCode +
-               ", person=" + person +
-               '}';
+        ApiAddress apiAddress = new ApiAddress();
+        apiAddress.setId(getId());
+        apiAddress.setStreetAddress(getStreetAddress());
+        apiAddress.setCity(getCity());
+        apiAddress.setState(getState().getCode());
+        apiAddress.setZipCode(getZipCode());
+        apiAddress.setPersonId(getPerson().getId());
+        return apiAddress;
     }
 }

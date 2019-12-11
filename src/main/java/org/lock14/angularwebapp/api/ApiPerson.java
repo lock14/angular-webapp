@@ -3,7 +3,7 @@ package org.lock14.angularwebapp.api;
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
-public class ApiPerson implements ApiCopyable<ApiPerson> {
+public class ApiPerson implements Identifiable<Long> {
     private Long id;
     @NotNull
     private String firstName;
@@ -14,27 +14,24 @@ public class ApiPerson implements ApiCopyable<ApiPerson> {
         return id;
     }
 
-    public ApiPerson setId(Long id) {
+    public void setId(Long id) {
         this.id = id;
-        return this;
     }
 
     public String getFirstName() {
         return firstName;
     }
 
-    public ApiPerson setFirstName(String firstName) {
+    public void setFirstName(String firstName) {
         this.firstName = firstName;
-        return this;
     }
 
     public String getLastName() {
         return lastName;
     }
 
-    public ApiPerson setLastName(String lastName) {
+    public void setLastName(String lastName) {
         this.lastName = lastName;
-        return this;
     }
 
     @Override
@@ -62,12 +59,5 @@ public class ApiPerson implements ApiCopyable<ApiPerson> {
                ", firstName='" + firstName + '\'' +
                ", lastName='" + lastName + '\'' +
                '}';
-    }
-
-    @Override
-    public ApiPerson copy(ApiPerson from) {
-        setFirstName(from.firstName);
-        setLastName(from.lastName);
-        return this;
     }
 }

@@ -3,7 +3,7 @@ package org.lock14.angularwebapp.api;
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
-public class ApiAddress implements ApiCopyable<ApiAddress> {
+public class ApiAddress implements Identifiable<Long> {
     private Long id;
 
     @NotNull
@@ -16,7 +16,7 @@ public class ApiAddress implements ApiCopyable<ApiAddress> {
     private String state;
 
     @NotNull
-    private Integer zipCode;
+    private String zipCode;
 
     private Long personId;
 
@@ -24,54 +24,48 @@ public class ApiAddress implements ApiCopyable<ApiAddress> {
         return id;
     }
 
-    public ApiAddress setId(Long id) {
+    public void setId(Long id) {
         this.id = id;
-        return this;
     }
 
     public String getStreetAddress() {
         return streetAddress;
     }
 
-    public ApiAddress setStreetAddress(String streetAddress) {
+    public void setStreetAddress(String streetAddress) {
         this.streetAddress = streetAddress;
-        return this;
     }
 
     public String getCity() {
         return city;
     }
 
-    public ApiAddress setCity(String city) {
+    public void setCity(String city) {
         this.city = city;
-        return this;
     }
 
     public String getState() {
         return state;
     }
 
-    public ApiAddress setState(String state) {
+    public void setState(String state) {
         this.state = state;
-        return this;
     }
 
-    public Integer getZipCode() {
+    public String getZipCode() {
         return zipCode;
     }
 
-    public ApiAddress setZipCode(Integer zipCode) {
+    public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
-        return this;
     }
 
     public Long getPersonId() {
         return personId;
     }
 
-    public ApiAddress setPersonId(Long personId) {
+    public void setPersonId(Long personId) {
         this.personId = personId;
-        return this;
     }
 
     @Override
@@ -105,15 +99,5 @@ public class ApiAddress implements ApiCopyable<ApiAddress> {
                ", zipCode=" + zipCode +
                ", personId=" + personId +
                '}';
-    }
-
-    @Override
-    public ApiAddress copy(ApiAddress from) {
-        this.setStreetAddress(from.getStreetAddress());
-        this.setCity(from.getCity());
-        this.setState(from.getState());
-        this.setZipCode(from.getZipCode());
-        this.setPersonId(from.getPersonId());
-        return this;
     }
 }
