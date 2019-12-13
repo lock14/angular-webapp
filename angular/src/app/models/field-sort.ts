@@ -1,4 +1,4 @@
-import {Direction} from './Direction';
+import {Direction} from './direction';
 
 export class FieldSort {
   field: string;

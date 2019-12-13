@@ -28,15 +28,19 @@ export class PagingRestService<T> implements PagingService<T> {
     return this.httpClient.get<Page<T>>(this.baseUri, {params});
   }
 
+  public get(id: string | number): Observable<T> {
+    return this.httpClient.get<T>(this.baseUri + '/' + id);
+  }
+
   public create(data: T): Observable<T> {
     return this.httpClient.post<T>(this.baseUri, data);
   }
 
-  public update(id: string, data: T): Observable<T> {
+  public update(id: string | number, data: T): Observable<T> {
     return this.httpClient.put<T>(this.baseUri + '/' + id, data);
   }
 
-  public delete(id: string): Observable<any> {
+  public delete(id: string | number): Observable<any> {
     return this.httpClient.delete(this.baseUri + '/' + id);
   }
 }

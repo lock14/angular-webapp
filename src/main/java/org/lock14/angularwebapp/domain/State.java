@@ -6,12 +6,12 @@ import javax.persistence.Id;
 
 @Entity
 public class State {
+    @Id
     private String code;
 
     @Column(nullable = false)
     private String name;
 
-    @Id
     public String getCode() {
         return code;
     }

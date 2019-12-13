@@ -9,6 +9,8 @@ public class ApiPerson implements Identifiable<Long> {
     private String firstName;
     @NotNull
     private String lastName;
+    @NotNull
+    private Long addressId;
 
     public Long getId() {
         return id;
@@ -34,6 +36,15 @@ public class ApiPerson implements Identifiable<Long> {
         this.lastName = lastName;
     }
 
+    public Long getAddressId() {
+        return addressId;
+    }
+
+    public ApiPerson setAddressId(Long addressId) {
+        this.addressId = addressId;
+        return this;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -43,21 +54,24 @@ public class ApiPerson implements Identifiable<Long> {
             return false;
         }
         ApiPerson apiPerson = (ApiPerson) o;
-        return Objects.equals(getFirstName(), apiPerson.getFirstName()) &&
-               Objects.equals(getLastName(), apiPerson.getLastName());
+        return Objects.equals(getId(), apiPerson.getId()) &&
+               Objects.equals(getFirstName(), apiPerson.getFirstName()) &&
+               Objects.equals(getLastName(), apiPerson.getLastName()) &&
+               Objects.equals(getAddressId(), apiPerson.getAddressId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getFirstName(), getLastName());
+        return Objects.hash(getId(), getFirstName(), getLastName(), getAddressId());
     }
 
     @Override
     public String toString() {
-        return "PersonResponse{" +
+        return "ApiPerson{" +
                "id=" + id +
                ", firstName='" + firstName + '\'' +
                ", lastName='" + lastName + '\'' +
+               ", addressId=" + addressId +
                '}';
     }
 }

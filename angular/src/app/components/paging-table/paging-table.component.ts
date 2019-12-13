@@ -3,10 +3,10 @@ import {MatPaginator, MatSort} from '@angular/material';
 import {merge, of} from 'rxjs';
 import {map, switchMap} from 'rxjs/operators';
 import {PagingRestService} from '../../services/paging-rest.service';
-import {Direction} from '../../models/Direction';
+import {Direction} from '../../models/direction';
 import {Sort} from '@angular/material/sort';
 import {PageEvent} from '@angular/material/paginator';
-import {FieldSort} from '../../models/FieldSort';
+import {FieldSort} from '../../models/field-sort';
 import {SearchCriteria} from '../../models/search-criteria';
 import {PagingService} from '../../services/paging-service';
 

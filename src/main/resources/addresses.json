@@ -6,10 +6,7 @@
     "state": {
       "code": "WI"
     },
-    "zipCode": "54165",
-    "person": {
-      "id": 50
-    }
+    "zipCode": "54165"
   },
   {
     "id": 2,
@@ -18,10 +15,7 @@
     "state": {
       "code": "KS"
     },
-    "zipCode": "67107",
-    "person": {
-      "id": 49
-    }
+    "zipCode": "67107"
   },
   {
     "id": 3,
@@ -30,10 +24,7 @@
     "state": {
       "code": "CA"
     },
-    "zipCode": "95705",
-    "person": {
-      "id": 48
-    }
+    "zipCode": "95705"
   },
   {
     "id": 4,
@@ -42,10 +33,7 @@
     "state": {
       "code": "WA"
     },
-    "zipCode": "83501",
-    "person": {
-      "id": 47
-    }
+    "zipCode": "83501"
   },
   {
     "id": 5,
@@ -54,10 +42,7 @@
     "state": {
       "code": "VA"
     },
-    "zipCode": "24011",
-    "person": {
-      "id": 46
-    }
+    "zipCode": "24011"
   },
   {
     "id": 6,
@@ -66,10 +51,7 @@
     "state": {
       "code": "PA"
     },
-    "zipCode": "16801",
-    "person": {
-      "id": 45
-    }
+    "zipCode": "16801"
   },
   {
     "id": 7,
@@ -78,10 +60,7 @@
     "state": {
       "code": "CT"
     },
-    "zipCode": "06002",
-    "person": {
-      "id": 44
-    }
+    "zipCode": "06002"
   },
   {
     "id": 8,
@@ -90,10 +69,7 @@
     "state": {
       "code": "WA"
     },
-    "zipCode": "98225",
-    "person": {
-      "id": 43
-    }
+    "zipCode": "98225"
   },
   {
     "id": 9,
@@ -102,10 +78,7 @@
     "state": {
       "code": "NY"
     },
-    "zipCode": "14202",
-    "person": {
-      "id": 42
-    }
+    "zipCode": "14202"
   },
   {
     "id": 10,
@@ -114,10 +87,7 @@
     "state": {
       "code": "OH"
     },
-    "zipCode": "44115",
-    "person": {
-      "id": 41
-    }
+    "zipCode": "44115"
   },
   {
     "id": 11,
@@ -126,10 +96,7 @@
     "state": {
       "code": "CT"
     },
-    "zipCode": "06103",
-    "person": {
-      "id": 40
-    }
+    "zipCode": "06103"
   },
   {
     "id": 12,
@@ -138,10 +105,7 @@
     "state": {
       "code": "NJ"
     },
-    "zipCode": "07087",
-    "person": {
-      "id": 39
-    }
+    "zipCode": "07087"
   },
   {
     "id": 13,
@@ -150,10 +114,7 @@
     "state": {
       "code": "NJ"
     },
-    "zipCode": "07306",
-    "person": {
-      "id": 38
-    }
+    "zipCode": "07306"
   },
   {
     "id": 14,
@@ -162,10 +123,7 @@
     "state": {
       "code": "LA"
     },
-    "zipCode": "70520",
-    "person": {
-      "id": 37
-    }
+    "zipCode": "70520"
   },
   {
     "id": 15,
@@ -174,10 +132,7 @@
     "state": {
       "code": "NC"
     },
-    "zipCode": "28658",
-    "person": {
-      "id": 36
-    }
+    "zipCode": "28658"
   },
   {
     "id": 16,
@@ -186,10 +141,7 @@
     "state": {
       "code": "TX"
     },
-    "zipCode": "75207",
-    "person": {
-      "id": 35
-    }
+    "zipCode": "75207"
   },
   {
     "id": 17,
@@ -198,10 +150,7 @@
     "state": {
       "code": "NM"
     },
-    "zipCode": "87008",
-    "person": {
-      "id": 34
-    }
+    "zipCode": "87008"
   },
   {
     "id": 18,
@@ -210,10 +159,7 @@
     "state": {
       "code": "TX"
     },
-    "zipCode": "77063",
-    "person": {
-      "id": 33
-    }
+    "zipCode": "77063"
   },
   {
     "id": 19,
@@ -222,10 +168,7 @@
     "state": {
       "code": "PA"
     },
-    "zipCode": "19108",
-    "person": {
-      "id": 32
-    }
+    "zipCode": "19108"
   },
   {
     "id": 20,
@@ -234,10 +177,7 @@
     "state": {
       "code": "UT"
     },
-    "zipCode": "84111",
-    "person": {
-      "id": 31
-    }
+    "zipCode": "84111"
   },
   {
     "id": 21,
@@ -246,10 +186,7 @@
     "state": {
       "code": "SC"
     },
-    "zipCode": "29210",
-    "person": {
-      "id": 30
-    }
+    "zipCode": "29210"
   },
   {
     "id": 22,
@@ -258,10 +195,7 @@
     "state": {
       "code": "IL"
     },
-    "zipCode": "60148",
-    "person": {
-      "id": 29
-    }
+    "zipCode": "60148"
   },
   {
     "id": 23,
@@ -270,10 +204,7 @@
     "state": {
       "code": "KS"
     },
-    "zipCode": "66032",
-    "person": {
-      "id": 28
-    }
+    "zipCode": "66032"
   },
   {
     "id": 24,
@@ -282,10 +213,7 @@
     "state": {
       "code": "OH"
     },
-    "zipCode": "44114",
-    "person": {
-      "id": 27
-    }
+    "zipCode": "44114"
   },
   {
     "id": 25,
@@ -294,10 +222,7 @@
     "state": {
       "code": "CA"
     },
-    "zipCode": "94104",
-    "person": {
-      "id": 26
-    }
+    "zipCode": "94104"
   },
   {
     "id": 26,
@@ -306,10 +231,7 @@
     "state": {
       "code": "CA"
     },
-    "zipCode": "95401",
-    "person": {
-      "id": 25
-    }
+    "zipCode": "95401"
   },
   {
     "id": 27,
@@ -318,10 +240,7 @@
     "state": {
       "code": "VT"
     },
-    "zipCode": "05777",
-    "person": {
-      "id": 24
-    }
+    "zipCode": "05777"
   },
   {
     "id": 28,
@@ -330,10 +249,7 @@
     "state": {
       "code": "CA"
     },
-    "zipCode": "92262",
-    "person": {
-      "id": 23
-    }
+    "zipCode": "92262"
   },
   {
     "id": 29,
@@ -342,10 +258,7 @@
     "state": {
       "code": "NJ"
     },
-    "zipCode": "08876",
-    "person": {
-      "id": 22
-    }
+    "zipCode": "08876"
   },
   {
     "id": 30,
@@ -354,10 +267,7 @@
     "state": {
       "code": "CO"
     },
-    "zipCode": "80030",
-    "person": {
-      "id": 21
-    }
+    "zipCode": "80030"
   },
   {
     "id": 31,
@@ -366,10 +276,7 @@
     "state": {
       "code": "DC"
     },
-    "zipCode": "20007",
-    "person": {
-      "id": 20
-    }
+    "zipCode": "20007"
   },
   {
     "id": 32,
@@ -378,10 +285,7 @@
     "state": {
       "code": "PA"
     },
-    "zipCode": "17837",
-    "person": {
-      "id": 19
-    }
+    "zipCode": "17837"
   },
   {
     "id": 33,
@@ -390,10 +294,7 @@
     "state": {
       "code": "CA"
     },
-    "zipCode": "95054",
-    "person": {
-      "id": 18
-    }
+    "zipCode": "95054"
   },
   {
     "id": 34,
@@ -402,10 +303,7 @@
     "state": {
       "code": "MI"
     },
-    "zipCode": "48226",
-    "person": {
-      "id": 17
-    }
+    "zipCode": "48226"
   },
   {
     "id": 35,
@@ -414,10 +312,7 @@
     "state": {
       "code": "VA"
     },
-    "zipCode": "24608",
-    "person": {
-      "id": 16
-    }
+    "zipCode": "24608"
   },
   {
     "id": 36,
@@ -426,10 +321,7 @@
     "state": {
       "code": "CA"
     },
-    "zipCode": "95678",
-    "person": {
-      "id": 15
-    }
+    "zipCode": "95678"
   },
   {
     "id": 37,
@@ -438,10 +330,7 @@
     "state": {
       "code": "VA"
     },
-    "zipCode": "20705",
-    "person": {
-      "id": 14
-    }
+    "zipCode": "20705"
   },
   {
     "id": 38,
@@ -450,10 +339,7 @@
     "state": {
       "code": "WA"
     },
-    "zipCode": "98052",
-    "person": {
-      "id": 13
-    }
+    "zipCode": "98052"
   },
   {
     "id": 39,
@@ -462,10 +348,7 @@
     "state": {
       "code": "CA"
     },
-    "zipCode": "90278",
-    "person": {
-      "id": 12
-    }
+    "zipCode": "90278"
   },
   {
     "id": 40,
@@ -474,10 +357,7 @@
     "state": {
       "code": "WI"
     },
-    "zipCode": "54838",
-    "person": {
-      "id": 11
-    }
+    "zipCode": "54838"
   },
   {
     "id": 41,
@@ -486,10 +366,7 @@
     "state": {
       "code": "WA"
     },
-    "zipCode": "98168",
-    "person": {
-      "id": 10
-    }
+    "zipCode": "98168"
   },
   {
     "id": 42,
@@ -498,10 +375,7 @@
     "state": {
       "code": "LA"
     },
-    "zipCode": "70123",
-    "person": {
-      "id": 9
-    }
+    "zipCode": "70123"
   },
   {
     "id": 43,
@@ -510,10 +384,7 @@
     "state": {
       "code": "MA"
     },
-    "zipCode": "02653",
-    "person": {
-      "id": 8
-    }
+    "zipCode": "02653"
   },
   {
     "id": 44,
@@ -522,10 +393,7 @@
     "state": {
       "code": "VA"
     },
-    "zipCode": "23707",
-    "person": {
-      "id": 7
-    }
+    "zipCode": "23707"
   },
   {
     "id": 45,
@@ -534,10 +402,7 @@
     "state": {
       "code": "TX"
     },
-    "zipCode": "78602",
-    "person": {
-      "id": 6
-    }
+    "zipCode": "78602"
   },
   {
     "id": 46,
@@ -546,10 +411,7 @@
     "state": {
       "code": "OH"
     },
-    "zipCode": "45241",
-    "person": {
-      "id": 5
-    }
+    "zipCode": "45241"
   },
   {
     "id": 47,
@@ -558,10 +420,7 @@
     "state": {
       "code": "SD"
     },
-    "zipCode": "57201",
-    "person": {
-      "id": 4
-    }
+    "zipCode": "57201"
   },
   {
     "id": 48,
@@ -570,10 +429,7 @@
     "state": {
       "code": "KY"
     },
-    "zipCode": "40509",
-    "person": {
-      "id": 3
-    }
+    "zipCode": "40509"
   },
   {
     "id": 49,
@@ -582,10 +438,7 @@
     "state": {
       "code": "IL"
     },
-    "zipCode": "62701",
-    "person": {
-      "id": 2
-    }
+    "zipCode": "62701"
   },
   {
     "id": 50,
@@ -594,9 +447,6 @@
     "state": {
       "code": "CA"
     },
-    "zipCode": "90232",
-    "person": {
-      "id": 1
-    }
+    "zipCode": "90232"
   }
 ]

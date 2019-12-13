@@ -2,6 +2,6 @@
 LOCAL_NODE="angular/node/node"
 LOCAL_NPM="angular/node/node_modules/npm/bin/npm-cli.js"
 if [ ! -f "$LOCAL_NODE" ]; then
-  ./mvw generate-resources
+  ./mvnw generate-resources
 fi
 $LOCAL_NODE "$LOCAL_NPM" --scripts-prepend-node-path true --prefix angular "$@"

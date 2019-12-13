@@ -18,8 +18,6 @@ public class ApiAddress implements Identifiable<Long> {
     @NotNull
     private String zipCode;
 
-    private Long personId;
-
     public Long getId() {
         return id;
     }
@@ -60,14 +58,6 @@ public class ApiAddress implements Identifiable<Long> {
         this.zipCode = zipCode;
     }
 
-    public Long getPersonId() {
-        return personId;
-    }
-
-    public void setPersonId(Long personId) {
-        this.personId = personId;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -80,13 +70,12 @@ public class ApiAddress implements Identifiable<Long> {
         return Objects.equals(getStreetAddress(), that.getStreetAddress()) &&
                Objects.equals(getCity(), that.getCity()) &&
                Objects.equals(getState(), that.getState()) &&
-               Objects.equals(getZipCode(), that.getZipCode()) &&
-               Objects.equals(getPersonId(), that.getPersonId());
+               Objects.equals(getZipCode(), that.getZipCode());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getStreetAddress(), getCity(), getState(), getZipCode(), getPersonId());
+        return Objects.hash(getStreetAddress(), getCity(), getState(), getZipCode());
     }
 
     @Override
@@ -97,7 +86,6 @@ public class ApiAddress implements Identifiable<Long> {
                ", city='" + city + '\'' +
                ", state='" + state + '\'' +
                ", zipCode=" + zipCode +
-               ", personId=" + personId +
                '}';
     }
 }

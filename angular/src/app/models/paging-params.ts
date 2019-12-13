@@ -1,4 +1,4 @@
-import {FieldSort} from './FieldSort';
+import {FieldSort} from './field-sort';
 import {SearchCriteria} from './search-criteria';
 
 export class PagingParams {

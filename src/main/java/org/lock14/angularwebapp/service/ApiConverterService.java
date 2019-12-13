@@ -1,7 +1,6 @@
 package org.lock14.angularwebapp.service;
 
 import org.lock14.angularwebapp.domain.ApiConvertibleEntity;
-import org.lock14.angularwebapp.domain.Person;
 import org.lock14.angularwebapp.repository.SearchCriterion;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,7 +15,7 @@ import java.util.Optional;
 import java.util.function.Function;
 
 public abstract class ApiConverterService<Repo extends PagingAndSortingRepository<Entity, Id> & JpaSpecificationExecutor<Entity>,
-        ApiResource, Entity extends ApiConvertibleEntity<Entity, ApiResource>, Id>
+        ApiResource, Entity extends ApiConvertibleEntity<ApiResource>, Id>
         implements PagingRestService<ApiResource, Id> {
 
     private Repo repository;

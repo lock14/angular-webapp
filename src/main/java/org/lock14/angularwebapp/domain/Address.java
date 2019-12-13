@@ -11,7 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 @Entity
-public class Address implements ApiConvertibleEntity<Address, ApiAddress> {
+public class Address implements ApiConvertibleEntity<ApiAddress> {
     @Id
     @GeneratedValue
     private Long id;
@@ -31,9 +31,6 @@ public class Address implements ApiConvertibleEntity<Address, ApiAddress> {
     @NotNull
     @Column(nullable = false)
     private String zipCode;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Person person;
 
     public Long getId() {
         return id;
@@ -80,23 +77,13 @@ public class Address implements ApiConvertibleEntity<Address, ApiAddress> {
         return this;
     }
 
-    public Person getPerson() {
-        return person;
-    }
-
-    public Address setPerson(Person person) {
-        this.person = person;
-        return this;
-    }
-
     public static Address fromApi(ApiAddress apiAddress) {
         return new Address()
                 .setId(apiAddress.getId())
                 .setStreetAddress(apiAddress.getStreetAddress())
                 .setCity(apiAddress.getCity())
                 .setState(new State().setCode(apiAddress.getState()))
-                .setZipCode(apiAddress.getZipCode())
-                .setPerson(new Person().setId(apiAddress.getId()));
+                .setZipCode(apiAddress.getZipCode());
     }
 
     public ApiAddress toApi() {
@@ -106,7 +93,6 @@ public class Address implements ApiConvertibleEntity<Address, ApiAddress> {
         apiAddress.setCity(getCity());
         apiAddress.setState(getState().getCode());
         apiAddress.setZipCode(getZipCode());
-        apiAddress.setPersonId(getPerson().getId());
         return apiAddress;
     }
 }
