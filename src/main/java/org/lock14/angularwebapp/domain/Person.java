@@ -1,7 +1,5 @@
 package org.lock14.angularwebapp.domain;
 
-import org.lock14.angularwebapp.api.ApiPerson;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,7 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 @Entity
-public class Person implements ApiConvertibleEntity<ApiPerson> {
+public class Person {
     @Id
     @GeneratedValue
     private Long id;
@@ -27,6 +25,7 @@ public class Person implements ApiConvertibleEntity<ApiPerson> {
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "addressId", nullable = false)
     private Address address;
 
 
@@ -64,22 +63,5 @@ public class Person implements ApiConvertibleEntity<ApiPerson> {
     public Person setAddress(Address address) {
         this.address = address;
         return this;
-    }
-
-    public static Person fromApi(ApiPerson apiPerson) {
-        return new Person()
-                .setId(apiPerson.getId())
-                .setFirstName(apiPerson.getLastName())
-                .setLastName(apiPerson.getLastName())
-                .setAddress(new Address().setId(apiPerson.getAddressId()));
-    }
-
-    public ApiPerson toApi() {
-        ApiPerson apiPerson = new ApiPerson();
-        apiPerson.setId(getId());
-        apiPerson.setFirstName(getFirstName());
-        apiPerson.setLastName(getLastName());
-        apiPerson.setAddressId(getAddress().getId());
-        return apiPerson;
     }
 }

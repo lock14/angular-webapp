@@ -40,9 +40,8 @@ public class ApiPerson implements Identifiable<Long> {
         return addressId;
     }
 
-    public ApiPerson setAddressId(Long addressId) {
+    public void setAddressId(Long addressId) {
         this.addressId = addressId;
-        return this;
     }
 
     @Override

@@ -1,7 +1,5 @@
 package org.lock14.angularwebapp.domain;
 
-import org.lock14.angularwebapp.api.ApiAddress;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,7 +9,7 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 @Entity
-public class Address implements ApiConvertibleEntity<ApiAddress> {
+public class Address {
     @Id
     @GeneratedValue
     private Long id;
@@ -75,24 +73,5 @@ public class Address implements ApiConvertibleEntity<ApiAddress> {
     public Address setZipCode(String zipCode) {
         this.zipCode = zipCode;
         return this;
-    }
-
-    public static Address fromApi(ApiAddress apiAddress) {
-        return new Address()
-                .setId(apiAddress.getId())
-                .setStreetAddress(apiAddress.getStreetAddress())
-                .setCity(apiAddress.getCity())
-                .setState(new State().setCode(apiAddress.getState()))
-                .setZipCode(apiAddress.getZipCode());
-    }
-
-    public ApiAddress toApi() {
-        ApiAddress apiAddress = new ApiAddress();
-        apiAddress.setId(getId());
-        apiAddress.setStreetAddress(getStreetAddress());
-        apiAddress.setCity(getCity());
-        apiAddress.setState(getState().getCode());
-        apiAddress.setZipCode(getZipCode());
-        return apiAddress;
     }
 }
