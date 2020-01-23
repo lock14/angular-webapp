@@ -3,7 +3,7 @@ package org.lock14.angularwebapp.api;
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
-public class ApiPerson implements Identifiable<Long> {
+public class ApiPerson {
     private Long id;
     @NotNull
     private String firstName;
