@@ -22,7 +22,7 @@ import javax.validation.Valid;
 import java.lang.reflect.Method;
 
 @Validated
-public class PagingRestController<T, ID> {
+public abstract class PagingRestController<T, ID> {
     private PagingRestService<T, ID> restService;
 
     public PagingRestController(PagingRestService<T, ID> restService) {
