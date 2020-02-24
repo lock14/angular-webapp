@@ -2,14 +2,14 @@ package org.lock14.angularwebapp.api;
 
 import java.time.LocalDateTime;
 
-public final class ApiError {
+public final class Error {
     private final LocalDateTime timestamp;
     private final int status;
     private final String error;
     private final String message;
     private final String path;
 
-    private ApiError(LocalDateTime timestamp, int status, String error, String message, String path) {
+    private Error(LocalDateTime timestamp, int status, String error, String message, String path) {
         this.timestamp = timestamp;
         this.status = status;
         this.error = error;
@@ -92,8 +92,8 @@ public final class ApiError {
             return this;
         }
 
-        public ApiError build() {
-            return new ApiError(timestamp, status, error, message, path);
+        public Error build() {
+            return new Error(timestamp, status, error, message, path);
         }
     }
 }

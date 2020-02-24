@@ -1,4 +1,4 @@
-package org.lock14.angularwebapp.domain;
+package org.lock14.angularwebapp.persistence;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,7 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 @Entity
-public class Person {
+public class PersonEntity {
     @Id
     @GeneratedValue
     private Long id;
@@ -26,14 +26,14 @@ public class Person {
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "addressId", nullable = false)
-    private Address address;
+    private AddressEntity addressEntity;
 
 
     public Long getId() {
         return id;
     }
 
-    public Person setId(Long id) {
+    public PersonEntity setId(Long id) {
         this.id = id;
         return this;
     }
@@ -42,7 +42,7 @@ public class Person {
         return firstName;
     }
 
-    public Person setFirstName(String firstName) {
+    public PersonEntity setFirstName(String firstName) {
         this.firstName = firstName;
         return this;
     }
@@ -51,17 +51,17 @@ public class Person {
         return lastName;
     }
 
-    public Person setLastName(String lastName) {
+    public PersonEntity setLastName(String lastName) {
         this.lastName = lastName;
         return this;
     }
 
-    public Address getAddress() {
-        return address;
+    public AddressEntity getAddressEntity() {
+        return addressEntity;
     }
 
-    public Person setAddress(Address address) {
-        this.address = address;
+    public PersonEntity setAddressEntity(AddressEntity addressEntity) {
+        this.addressEntity = addressEntity;
         return this;
     }
 }

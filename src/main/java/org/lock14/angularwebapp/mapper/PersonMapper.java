@@ -1,30 +1,30 @@
 package org.lock14.angularwebapp.mapper;
 
-import org.lock14.angularwebapp.api.ApiPerson;
-import org.lock14.angularwebapp.domain.Address;
-import org.lock14.angularwebapp.domain.Person;
+import org.lock14.angularwebapp.api.Person;
+import org.lock14.angularwebapp.persistence.AddressEntity;
+import org.lock14.angularwebapp.persistence.PersonEntity;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 @Mapper
-public interface PersonMapper extends ApiMapper<ApiPerson, Person> {
+public interface PersonMapper extends ApiMapper<Person, PersonEntity> {
 
     @Override
-    @Mapping(source = "addressId", target = "address")
-    Person fromApi(ApiPerson apiPerson);
+    @Mapping(source = "addressId", target = "addressEntity")
+    PersonEntity fromApi(Person person);
 
     @Override
     @InheritInverseConfiguration
-    ApiPerson toApi(Person person);
+    Person toApi(PersonEntity personEntity);
 
-    default Address idToAddress(Long id) {
-        Address address = new Address();
-        address.setId(id);
-        return address;
+    default AddressEntity idToAddress(Long id) {
+        AddressEntity addressEntity = new AddressEntity();
+        addressEntity.setId(id);
+        return addressEntity;
     }
 
-    default Long addressToId(Address address) {
-        return address.getId();
+    default Long addressToId(AddressEntity addressEntity) {
+        return addressEntity.getId();
     }
 }

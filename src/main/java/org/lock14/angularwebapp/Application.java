@@ -1,9 +1,9 @@
 package org.lock14.angularwebapp;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.lock14.angularwebapp.domain.Address;
-import org.lock14.angularwebapp.domain.Person;
-import org.lock14.angularwebapp.domain.State;
+import org.lock14.angularwebapp.persistence.AddressEntity;
+import org.lock14.angularwebapp.persistence.PersonEntity;
+import org.lock14.angularwebapp.persistence.StateEntity;
 import org.lock14.angularwebapp.repository.AddressRepository;
 import org.lock14.angularwebapp.repository.PersonRepository;
 import org.lock14.angularwebapp.repository.StateRepository;
@@ -25,17 +25,17 @@ public class Application {
 
         ClassPathResource resource = new ClassPathResource("states.json");
         StateRepository stateRepository = context.getBean(StateRepository.class);
-        List<State> states = Arrays.asList(mapper.readValue(resource.getInputStream(), State[].class));
-        stateRepository.saveAll(states);
+        List<StateEntity> stateEntities = Arrays.asList(mapper.readValue(resource.getInputStream(), StateEntity[].class));
+        stateRepository.saveAll(stateEntities);
 
         resource = new ClassPathResource("addresses.json");
         AddressRepository addressRepository = context.getBean(AddressRepository.class);
-        List<Address> addresses = Arrays.asList(mapper.readValue(resource.getInputStream(), Address[].class));
-        addressRepository.saveAll(addresses);
+        List<AddressEntity> addressEntities = Arrays.asList(mapper.readValue(resource.getInputStream(), AddressEntity[].class));
+        addressRepository.saveAll(addressEntities);
 
         resource = new ClassPathResource("people.json");
         PersonRepository personRepository = context.getBean(PersonRepository.class);
-        List<Person> people = Arrays.asList(mapper.readValue(resource.getInputStream(), Person[].class));
+        List<PersonEntity> people = Arrays.asList(mapper.readValue(resource.getInputStream(), PersonEntity[].class));
         personRepository.saveAll(people);
 
 

@@ -1,11 +1,11 @@
-package org.lock14.angularwebapp.domain;
+package org.lock14.angularwebapp.persistence;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class State {
+public class StateEntity {
     @Id
     private String code;
 
@@ -16,7 +16,7 @@ public class State {
         return code;
     }
 
-    public State setCode(String code) {
+    public StateEntity setCode(String code) {
         this.code = code;
         return this;
     }
@@ -25,7 +25,7 @@ public class State {
         return name;
     }
 
-    public State setName(String name) {
+    public StateEntity setName(String name) {
         this.name = name;
         return this;
     }

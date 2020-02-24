@@ -3,7 +3,7 @@ package org.lock14.angularwebapp.api;
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
-public class ApiPerson {
+public class Person {
     private Long id;
     @NotNull
     private String firstName;
@@ -49,14 +49,14 @@ public class ApiPerson {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof ApiPerson)) {
+        if (!(o instanceof Person)) {
             return false;
         }
-        ApiPerson apiPerson = (ApiPerson) o;
-        return Objects.equals(getId(), apiPerson.getId()) &&
-               Objects.equals(getFirstName(), apiPerson.getFirstName()) &&
-               Objects.equals(getLastName(), apiPerson.getLastName()) &&
-               Objects.equals(getAddressId(), apiPerson.getAddressId());
+        Person person = (Person) o;
+        return Objects.equals(getId(), person.getId()) &&
+               Objects.equals(getFirstName(), person.getFirstName()) &&
+               Objects.equals(getLastName(), person.getLastName()) &&
+               Objects.equals(getAddressId(), person.getAddressId());
     }
 
     @Override

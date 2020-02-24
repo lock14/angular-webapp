@@ -3,7 +3,7 @@ package org.lock14.angularwebapp.api;
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
-public class ApiAddress {
+public class Address {
     private Long id;
 
     @NotNull
@@ -63,10 +63,10 @@ public class ApiAddress {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof ApiAddress)) {
+        if (!(o instanceof Address)) {
             return false;
         }
-        ApiAddress that = (ApiAddress) o;
+        Address that = (Address) o;
         return Objects.equals(getStreetAddress(), that.getStreetAddress()) &&
                Objects.equals(getCity(), that.getCity()) &&
                Objects.equals(getState(), that.getState()) &&

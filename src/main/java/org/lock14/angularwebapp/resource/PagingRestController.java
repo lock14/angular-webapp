@@ -1,6 +1,6 @@
 package org.lock14.angularwebapp.resource;
 
-import org.lock14.angularwebapp.api.ApiPage;
+import org.lock14.angularwebapp.api.Page;
 import org.lock14.angularwebapp.service.PagingRestService;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -30,10 +30,10 @@ public abstract class PagingRestController<T, ID> {
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ApiPage<T>> findAll(
+    public ResponseEntity<Page<T>> findAll(
             @RequestParam MultiValueMap<String, String> queryParams,
             Pageable pageable) {
-        return ResponseEntity.ok(ApiPage.of(restService.findAll(queryParams, pageable)));
+        return ResponseEntity.ok(Page.of(restService.findAll(queryParams, pageable)));
     }
 
     @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)

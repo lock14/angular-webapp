@@ -9,15 +9,15 @@ import org.springframework.util.MultiValueMap;
 
 import java.util.Optional;
 
-public abstract class ApiConverterService<Repo extends PagingAndSortingRepository<Entity, Id> & JpaSpecificationExecutor<Entity>,
+public abstract class ApiMappingService<Repo extends PagingAndSortingRepository<Entity, Id> & JpaSpecificationExecutor<Entity>,
         ApiResource, Entity, Id> implements PagingRestService<ApiResource, Id> {
 
     private Repo repository;
     private ApiMapper<ApiResource, Entity> mapper;
     private SpecificationGenerator<Entity> specificationGenerator;
 
-    ApiConverterService(Repo repository, ApiMapper<ApiResource, Entity> mapper,
-                        SpecificationGenerator<Entity> specificationGenerator) {
+    ApiMappingService(Repo repository, ApiMapper<ApiResource, Entity> mapper,
+                      SpecificationGenerator<Entity> specificationGenerator) {
         this.repository = repository;
         this.mapper = mapper;
         this.specificationGenerator = specificationGenerator;

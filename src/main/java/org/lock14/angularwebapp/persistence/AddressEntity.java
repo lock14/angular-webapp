@@ -1,4 +1,4 @@
-package org.lock14.angularwebapp.domain;
+package org.lock14.angularwebapp.persistence;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,7 +9,7 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 @Entity
-public class Address {
+public class AddressEntity {
     @Id
     @GeneratedValue
     private Long id;
@@ -24,7 +24,7 @@ public class Address {
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
-    private State state;
+    private StateEntity stateEntity;
 
     @NotNull
     @Column(nullable = false)
@@ -34,44 +34,39 @@ public class Address {
         return id;
     }
 
-    public Address setId(Long id) {
+    public void setId(Long id) {
         this.id = id;
-        return this;
     }
 
     public String getStreetAddress() {
         return streetAddress;
     }
 
-    public Address setStreetAddress(String streetAddress) {
+    public void setStreetAddress(String streetAddress) {
         this.streetAddress = streetAddress;
-        return this;
     }
 
     public String getCity() {
         return city;
     }
 
-    public Address setCity(String city) {
+    public void setCity(String city) {
         this.city = city;
-        return this;
     }
 
-    public State getState() {
-        return state;
+    public StateEntity getStateEntity() {
+        return stateEntity;
     }
 
-    public Address setState(State state) {
-        this.state = state;
-        return this;
+    public void setStateEntity(StateEntity stateEntity) {
+        this.stateEntity = stateEntity;
     }
 
     public String getZipCode() {
         return zipCode;
     }
 
-    public Address setZipCode(String zipCode) {
+    public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
-        return this;
     }
 }

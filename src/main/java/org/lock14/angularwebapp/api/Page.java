@@ -1,18 +1,16 @@
 package org.lock14.angularwebapp.api;
 
-import org.springframework.data.domain.Page;
-
 import java.util.List;
 
-public class ApiPage<T> {
-    private Page<T> page;
+public class Page<T> {
+    private org.springframework.data.domain.Page page;
 
-    public ApiPage(Page<T> page) {
+    public Page(org.springframework.data.domain.Page page) {
         this.page = page;
     }
 
-    public static <T> ApiPage<T> of(Page<T> page) {
-        return new ApiPage<>(page);
+    public static <T> Page<T> of(org.springframework.data.domain.Page page) {
+        return new Page<>(page);
     }
 
     public List<T> getContent() {

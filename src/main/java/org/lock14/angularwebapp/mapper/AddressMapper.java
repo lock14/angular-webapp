@@ -1,28 +1,28 @@
 package org.lock14.angularwebapp.mapper;
 
-import org.lock14.angularwebapp.api.ApiAddress;
-import org.lock14.angularwebapp.domain.Address;
-import org.lock14.angularwebapp.domain.State;
+import org.lock14.angularwebapp.api.Address;
+import org.lock14.angularwebapp.persistence.AddressEntity;
+import org.lock14.angularwebapp.persistence.StateEntity;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 
 @Mapper
-public interface AddressMapper extends ApiMapper<ApiAddress, Address> {
+public interface AddressMapper extends ApiMapper<Address, AddressEntity> {
 
     @Override
-    Address fromApi(ApiAddress apiAddress);
+    AddressEntity fromApi(Address address);
 
     @Override
     @InheritInverseConfiguration
-    ApiAddress toApi(Address address);
+    Address toApi(AddressEntity addressEntity);
 
-    default String stateToStateCode(State state) {
-        return state.getCode();
+    default String stateToStateCode(StateEntity stateEntity) {
+        return stateEntity.getCode();
     }
 
-    default State stateCodeToState(String stateCode) {
-        State state = new State();
-        state.setCode(stateCode);
-        return state;
+    default StateEntity stateCodeToState(String stateCode) {
+        StateEntity stateEntity = new StateEntity();
+        stateEntity.setCode(stateCode);
+        return stateEntity;
     }
 }
