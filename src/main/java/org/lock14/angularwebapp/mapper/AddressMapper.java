@@ -5,6 +5,7 @@ import org.lock14.angularwebapp.persistence.AddressEntity;
 import org.lock14.angularwebapp.persistence.StateEntity;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 @Mapper
 public interface AddressMapper extends ApiMapper<Address, AddressEntity> {

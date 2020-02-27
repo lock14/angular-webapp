@@ -1,6 +1,8 @@
 package org.lock14.angularwebapp.service;
 
+import org.lock14.angularwebapp.mapper.AddressMapper;
 import org.lock14.angularwebapp.persistence.AddressEntity;
+import org.lock14.angularwebapp.persistence.AddressEntity_;
 import org.lock14.angularwebapp.persistence.PersonEntity;
 import org.lock14.angularwebapp.mapper.PersonMapper;
 import org.lock14.angularwebapp.persistence.PersonEntity_;
@@ -17,28 +19,23 @@ import java.util.stream.Collectors;
 
 @Component
 public class PersonSpecificationGenerator implements SpecificationGenerator<PersonEntity> {
-    private final AddressSpecificationGenerator addressSpecificationGenerator;
     private final PersonMapper personMapper;
+    private final AddressMapper addressMapper;
 
     @Autowired
     public PersonSpecificationGenerator(PersonMapper personMapper,
-                                        AddressSpecificationGenerator addressSpecificationGenerator) {
+                                        AddressMapper addressMapper) {
         this.personMapper = personMapper;
-        this.addressSpecificationGenerator = addressSpecificationGenerator;
+        this.addressMapper = addressMapper;
     }
 
     public Specification<PersonEntity> generate(MultiValueMap<String, String> filters) {
-        Specification<PersonEntity> spec = (root, query, builder) -> {
-            Join<PersonEntity, AddressEntity> join = root.join(PersonEntity_.addressEntity, JoinType.INNER);
-            return builder.and(join.get(PersonEntity_.ID).in(Collections.emptyList()),
-                               join.get(PersonEntity_.ID).in(Collections.emptyList()));
-        };
         return SearchCriterion.in(PersonEntity_.id,
                                   filters.getOrDefault("id", Collections.emptyList())
                                          .stream()
                                          .map(Long::valueOf)
                                          .collect(Collectors.toList()))
-                              .and(SearchCriterion.in(PersonEntity_.addressEntity,
+                              .and(SearchCriterion.in(PersonEntity_.address,
                                                       filters.getOrDefault("addressId", Collections.emptyList())
                                                              .stream()
                                                              .map(Long::valueOf)
@@ -47,6 +44,15 @@ public class PersonSpecificationGenerator implements SpecificationGenerator<Pers
                               .and(SearchCriterion.in(PersonEntity_.firstName,
                                                       filters.getOrDefault("firstName", Collections.emptyList())))
                               .and(SearchCriterion.in(PersonEntity_.lastName,
-                                                      filters.getOrDefault("lastName", Collections.emptyList())));
+                                                      filters.getOrDefault("lastName", Collections.emptyList())))
+                              .and(SearchCriterion.joinIn(PersonEntity_.address, AddressEntity_.city,
+                                                          filters.getOrDefault("city", Collections.emptyList())))
+                              .and(SearchCriterion.joinIn(PersonEntity_.address, AddressEntity_.state,
+                                                          filters.getOrDefault("state", Collections.emptyList())
+                                                                 .stream()
+                                                                 .map(addressMapper::stateCodeToState)
+                                                                 .collect(Collectors.toList())))
+                              .and(SearchCriterion.joinIn(PersonEntity_.address, AddressEntity_.zipCode,
+                                                          filters.getOrDefault("zipCode", Collections.emptyList())));
     }
 }

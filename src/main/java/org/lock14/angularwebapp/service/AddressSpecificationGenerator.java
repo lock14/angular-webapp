@@ -32,7 +32,7 @@ public class AddressSpecificationGenerator implements SpecificationGenerator<Add
                                                       filters.get("streetAddress")))
                               .and(SearchCriterion.in(AddressEntity_.city,
                                                       filters.getOrDefault("city", Collections.emptyList())))
-                              .and(SearchCriterion.in(AddressEntity_.stateEntity,
+                              .and(SearchCriterion.in(AddressEntity_.state,
                                                       filters.getOrDefault("state", Collections.emptyList())
                                                              .stream()
                                                              .map(addressMapper::stateCodeToState)

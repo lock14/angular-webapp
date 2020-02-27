@@ -11,7 +11,7 @@ import org.mapstruct.Mapping;
 public interface PersonMapper extends ApiMapper<Person, PersonEntity> {
 
     @Override
-    @Mapping(source = "addressId", target = "addressEntity")
+    @Mapping(source = "addressId", target = "address")
     PersonEntity fromApi(Person person);
 
     @Override

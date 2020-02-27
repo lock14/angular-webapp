@@ -26,7 +26,7 @@ public class PersonEntity {
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "addressId", nullable = false)
-    private AddressEntity addressEntity;
+    private AddressEntity address;
 
 
     public Long getId() {
@@ -56,12 +56,12 @@ public class PersonEntity {
         return this;
     }
 
-    public AddressEntity getAddressEntity() {
-        return addressEntity;
+    public AddressEntity getAddress() {
+        return address;
     }
 
-    public PersonEntity setAddressEntity(AddressEntity addressEntity) {
-        this.addressEntity = addressEntity;
+    public PersonEntity setAddress(AddressEntity addressEntity) {
+        this.address = addressEntity;
         return this;
     }
 }

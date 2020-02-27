@@ -1,5 +1,6 @@
 package org.lock14.angularwebapp.repository;
 
+import org.lock14.angularwebapp.persistence.PersonEntity_;
 import org.springframework.data.jpa.domain.Specification;
 
 import javax.persistence.criteria.Path;
@@ -21,6 +22,14 @@ public final class SearchCriterion {
     Specification<T1> in(SingularAttribute<T1, T2> field, Collection<T2> values) {
         return (root, query, builder) -> values == null || values.isEmpty() ? null : root.get(field).in(values);
     }
+
+    public static <T1, T2, T3>
+    Specification<T1> joinIn(SingularAttribute<T1, T2> joinEntity, SingularAttribute<T2, T3> field, Collection<T3> values) {
+        return (root, query, builder) -> values == null || values.isEmpty()
+                                         ? null
+                                         : root.join(joinEntity).get(field).in(values);
+    }
+
     public static <T1, T2>
     Specification<T1> in(Path<T1> path, Collection<T2> values) {
         return (root, query, builder) -> values == null || values.isEmpty() ? null : path.in(values);

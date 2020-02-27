@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
@@ -24,7 +25,8 @@ public class AddressEntity {
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
-    private StateEntity stateEntity;
+    @JoinColumn(nullable = false)
+    private StateEntity state;
 
     @NotNull
     @Column(nullable = false)
@@ -54,12 +56,12 @@ public class AddressEntity {
         this.city = city;
     }
 
-    public StateEntity getStateEntity() {
-        return stateEntity;
+    public StateEntity getState() {
+        return state;
     }
 
-    public void setStateEntity(StateEntity stateEntity) {
-        this.stateEntity = stateEntity;
+    public void setState(StateEntity stateEntity) {
+        this.state = stateEntity;
     }
 
     public String getZipCode() {
