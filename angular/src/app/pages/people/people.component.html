@@ -1,6 +1,10 @@
 <div class="page-flex">
-  <app-person-form class="flex-item" [submitText]="'Search'" (personEmitter)="search($event)"></app-person-form>
+  <app-person-form class="flex-item" [submitText]="'Search'" (personEmitter)="search($event)"
+                   [title]="'Search People'">
+  </app-person-form>
   <p class="flex-spacer"></p>
-  <app-paging-rest-table class="flex-item" [pagingService]="personService" [columns]="columns">
+  <button mat-raised-button color="primary" (click)="add()">Add</button>
+  <p class="flex-spacer"></p>
+  <app-paging-rest-table class="flex-item" [pagingService]="personService" [columns]="columns" [snackBar]="snackBar">
   </app-paging-rest-table>
 </div>

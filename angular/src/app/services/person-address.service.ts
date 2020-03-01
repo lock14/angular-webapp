@@ -4,7 +4,7 @@ import {Person} from '../models/person';
 import {Address} from '../models/address';
 import {PagingService} from './paging-service';
 import {PersonAddress} from '../models/person-address';
-import {forkJoin, Observable, of} from 'rxjs';
+import {forkJoin, Observable} from 'rxjs';
 import {PagingParams} from '../models/paging-params';
 import {Page} from '../models/page';
 import {catchError, flatMap, map} from 'rxjs/operators';
@@ -20,18 +20,16 @@ export class PersonAddressService implements PagingService<PersonAddress> {
   }
 
   public findAll(pagingParams: PagingParams): Observable<Page<PersonAddress>> {
-    return undefined;
+    return this.personService.findAll(pagingParams)
+      .pipe(
+        flatMap(page => page.flatMap(person => this.toPersonAddress(person)))
+      );
   }
 
   public get(id: string | number): Observable<PersonAddress> {
     return this.personService.get(id)
       .pipe(
-        flatMap(person => this.addressService.get(person.addressId)
-          .pipe(
-            map(address => [person, address])
-          )
-        ),
-        map((data: [Person, Address]) => new PersonAddress(data[0], data[1]))
+        flatMap(person => this.toPersonAddress(person))
       );
   }
 
@@ -53,7 +51,7 @@ export class PersonAddressService implements PagingService<PersonAddress> {
       );
   }
 
-  update(id: string | number, data: PersonAddress): Observable<PersonAddress> {
+  public update(id: string | number, data: PersonAddress): Observable<PersonAddress> {
     const addressObservable: Observable<Address> = this.addressService.update(data.address.id, data.address);
     const personObservable: Observable<Person> = this.personService.update(data.person.id, data.person);
     return forkJoin([personObservable, addressObservable])
@@ -62,7 +60,14 @@ export class PersonAddressService implements PagingService<PersonAddress> {
       );
   }
 
-  delete(id: string | number): Observable<void> {
+  public delete(id: string | number): Observable<void> {
     return this.personService.delete(id);
+  }
+
+  private toPersonAddress(person: Person): Observable<PersonAddress> {
+    return this.addressService.get(person.addressId)
+      .pipe(
+        map(address => new PersonAddress(person, address))
+      );
   }
 }

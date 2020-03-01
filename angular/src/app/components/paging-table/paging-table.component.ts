@@ -2,13 +2,14 @@ import {AfterViewInit, Component, EventEmitter, Input, OnInit, ViewChild} from '
 import {MatPaginator, MatSort} from '@angular/material';
 import {merge, of} from 'rxjs';
 import {map, switchMap} from 'rxjs/operators';
-import {PagingRestService} from '../../services/paging-rest.service';
 import {Direction} from '../../models/direction';
 import {Sort} from '@angular/material/sort';
 import {PageEvent} from '@angular/material/paginator';
 import {FieldSort} from '../../models/field-sort';
 import {SearchCriteria} from '../../models/search-criteria';
 import {PagingService} from '../../services/paging-service';
+import {error} from 'util';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-paging-rest-table',
@@ -18,7 +19,9 @@ import {PagingService} from '../../services/paging-service';
 export class PagingTableComponent<T> implements OnInit, AfterViewInit {
   @Input() pagingService: PagingService<T> = null;
   @Input() columns: any[];
-  fields: string[];
+  @Input() snackBar: MatSnackBar;
+
+  displayedColumns: string[] = [];
   totalElements = 0;
   loading = false;
   data: T[] = [];
@@ -27,12 +30,16 @@ export class PagingTableComponent<T> implements OnInit, AfterViewInit {
   @ViewChild(MatSort, {static: false}) sort: MatSort;
   filterChange: EventEmitter<SearchCriteria> = new EventEmitter<SearchCriteria>();
   searchCriteria: SearchCriteria = undefined;
+  hidden: boolean = true;
 
   constructor() {
   }
 
   ngOnInit(): void {
-    this.fields = this.columns.map(column => column.field);
+    this.columns.map(column => column.field)
+      .forEach(field => this.displayedColumns.push(field));
+    this.displayedColumns.push('edit');
+    this.displayedColumns.push('delete');
   }
 
   ngAfterViewInit(): void {
@@ -62,7 +69,10 @@ export class PagingTableComponent<T> implements OnInit, AfterViewInit {
           this.totalElements = data.totalElements;
           return data.content;
         })
-      ).subscribe(data => this.data = data);
+      ).subscribe(data => {
+        this.data = data;
+        this.hidden = data.length === 0;
+      });
   }
 
   public search(searchCriteria: SearchCriteria = {}): void {
@@ -110,5 +120,21 @@ export class PagingTableComponent<T> implements OnInit, AfterViewInit {
     return !this.isPageEvent(object)
       && !this.isSort(object)
       && (object && Object.keys((object as SearchCriteria)).length > 0);
+  }
+
+  displayStyle() {
+    if (this.hidden) {
+      return 'none';
+    } else {
+      return 'block';
+    }
+  }
+
+  delete(id: string | number) {
+    this.pagingService.delete(id)
+      .subscribe(
+        resp => this.search(this.searchCriteria),
+        err => this.snackBar.open('Error', 'OK')
+      );
   }
 }

@@ -1,13 +1,19 @@
-<form [formGroup]="form">
+<h2 mat-dialog-title>
+  {{title}}
+  <button *ngIf="this.dialogRef" style="float: right" (click)="close()"
+          class="item" mat-button>close</button>
+</h2>
+<mat-dialog-content [formGroup]="form">
   <mat-form-field class="full-width">
     <input formControlName="firstName" matInput placeholder="First Name">
   </mat-form-field>
   <mat-form-field class="full-width">
     <input formControlName="lastName" matInput placeholder="Last Name">
   </mat-form-field>
-</form>
-<div class="button-group">
+</mat-dialog-content>
+<mat-dialog-actions class="button-group">
   <button (click)="clear()" class="item" mat-raised-button color="primary">clear</button>
   <span class="spacer"></span>
-  <button (click)="submit()" type="submit" class="item" mat-raised-button color="primary">{{submitText}}</button>
-</div>
+  <button (click)="submit()" [disabled]="!this.form.valid"
+          type="submit" class="item" mat-raised-button color="primary">{{submitText}}</button>
+</mat-dialog-actions>

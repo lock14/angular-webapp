@@ -9,7 +9,7 @@ public class Person {
     private String firstName;
     @NotNull
     private String lastName;
-    @NotNull
+
     private Long addressId;
 
     public Long getId() {

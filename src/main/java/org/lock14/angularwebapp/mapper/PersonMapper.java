@@ -19,12 +19,15 @@ public interface PersonMapper extends ApiMapper<Person, PersonEntity> {
     Person toApi(PersonEntity personEntity);
 
     default AddressEntity idToAddress(Long id) {
+        if (id == null) {
+            return null;
+        }
         AddressEntity addressEntity = new AddressEntity();
         addressEntity.setId(id);
         return addressEntity;
     }
 
     default Long addressToId(AddressEntity addressEntity) {
-        return addressEntity.getId();
+        return addressEntity == null ? null : addressEntity.getId();
     }
 }

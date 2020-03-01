@@ -23,9 +23,8 @@ public class PersonEntity {
     @Column(nullable = false)
     private String lastName;
 
-    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "addressId", nullable = false)
+    @JoinColumn(name = "addressId")
     private AddressEntity address;
 
 

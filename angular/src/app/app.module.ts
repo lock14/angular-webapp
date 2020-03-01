@@ -25,6 +25,9 @@ import {MatInputModule} from '@angular/material/input';
 import {ReactiveFormsModule} from '@angular/forms';
 import {PeopleComponent} from './pages/people/people.component';
 import {Address} from './models/address';
+import {MAT_DIALOG_DATA, MatDialogModule, MatDialogRef} from '@angular/material/dialog';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -42,18 +45,33 @@ import {Address} from './models/address';
     LayoutModule,
     MatButtonModule,
     MatFormFieldModule,
+    MatDialogModule,
     MatIconModule,
     MatInputModule,
     MatListModule,
     MatPaginatorModule,
     MatProgressSpinnerModule,
     MatSidenavModule,
+    MatSnackBarModule,
     MatSortModule,
     MatTableModule,
     MatToolbarModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatCheckboxModule
+  ],
+  entryComponents: [
+    PersonFormComponent
   ],
   providers: [
+
+    {
+      provide: MatDialogRef,
+      useFactory: () => null
+    },
+    {
+      provide: MAT_DIALOG_DATA,
+      useFactory: () => null
+    },
     {
       provide: 'personService',
       deps: [HttpClient],
