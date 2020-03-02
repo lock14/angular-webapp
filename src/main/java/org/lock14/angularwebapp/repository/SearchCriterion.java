@@ -1,6 +1,5 @@
 package org.lock14.angularwebapp.repository;
 
-import org.lock14.angularwebapp.persistence.PersonEntity_;
 import org.springframework.data.jpa.domain.Specification;
 
 import javax.persistence.criteria.Path;

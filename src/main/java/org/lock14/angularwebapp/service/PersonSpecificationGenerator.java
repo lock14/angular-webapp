@@ -1,10 +1,9 @@
 package org.lock14.angularwebapp.service;
 
 import org.lock14.angularwebapp.mapper.AddressMapper;
-import org.lock14.angularwebapp.persistence.AddressEntity;
+import org.lock14.angularwebapp.mapper.PersonMapper;
 import org.lock14.angularwebapp.persistence.AddressEntity_;
 import org.lock14.angularwebapp.persistence.PersonEntity;
-import org.lock14.angularwebapp.mapper.PersonMapper;
 import org.lock14.angularwebapp.persistence.PersonEntity_;
 import org.lock14.angularwebapp.repository.SearchCriterion;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +11,6 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 import org.springframework.util.MultiValueMap;
 
-import javax.persistence.criteria.Join;
-import javax.persistence.criteria.JoinType;
 import java.util.Collections;
 import java.util.stream.Collectors;
 

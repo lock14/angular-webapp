@@ -3,13 +3,13 @@ package org.lock14.angularwebapp.api;
 import java.util.List;
 
 public class Page<T> {
-    private org.springframework.data.domain.Page page;
+    private org.springframework.data.domain.Page<T> page;
 
-    public Page(org.springframework.data.domain.Page page) {
+    public Page(org.springframework.data.domain.Page<T> page) {
         this.page = page;
     }
 
-    public static <T> Page<T> of(org.springframework.data.domain.Page page) {
+    public static <T> Page<T> of(org.springframework.data.domain.Page<T> page) {
         return new Page<>(page);
     }
 
