@@ -22,7 +22,7 @@ export class ModalFormComponent<T> implements OnInit {
   disabledFields: Set<string>;
   form: FormGroup;
 
-  constructor(private dialogRef: MatDialogRef<ModalFormComponent<T>>,
+  constructor(public dialogRef: MatDialogRef<ModalFormComponent<T>>,
               @Inject(MAT_DIALOG_DATA) data) {
     if (data) {
       if (data.title) {

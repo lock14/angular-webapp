@@ -27,7 +27,7 @@ export class PeopleComponent implements OnInit {
 
   constructor(@Inject('personService') readonly personService: PagingRestService<Person>,
               private dialog: MatDialog,
-              private snackBar: MatSnackBar) {
+              public snackBar: MatSnackBar) {
   }
 
   public ngOnInit(): void {
