@@ -19,7 +19,6 @@ import {MatSortModule} from '@angular/material/sort';
 import {PagingRestService} from './services/paging-rest.service';
 import {Person} from './models/person';
 import {PagingTableComponent} from './components/paging-table/paging-table.component';
-import {PersonFormComponent} from './components/person-form/person-form.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {ReactiveFormsModule} from '@angular/forms';
@@ -64,7 +63,6 @@ import {ModalFormComponent} from './components/modal-form/modal-form.component';
     ModalFormComponent
   ],
   providers: [
-
     {
       provide: MatDialogRef,
       useFactory: () => null

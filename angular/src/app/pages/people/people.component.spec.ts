@@ -15,8 +15,11 @@ import {MatInputModule} from '@angular/material/input';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {MatSortModule} from '@angular/material/sort';
 import {ModalFormComponent} from '../../components/modal-form/modal-form.component';
+import {MatIconModule} from '@angular/material/icon';
+import {MAT_DIALOG_DATA, MatDialogModule, MatDialogRef} from '@angular/material/dialog';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
-describe('PersonComponent', () => {
+describe('PeopleComponent', () => {
   let component: PeopleComponent;
   let fixture: ComponentFixture<PeopleComponent>;
 
@@ -31,14 +34,25 @@ describe('PersonComponent', () => {
         NoopAnimationsModule,
         HttpClientTestingModule,
         MatFormFieldModule,
+        MatDialogModule,
+        MatIconModule,
         MatInputModule,
         MatPaginatorModule,
         MatProgressSpinnerModule,
+        MatSnackBarModule,
         MatSortModule,
         MatTableModule,
         ReactiveFormsModule
       ],
       providers: [
+        {
+          provide: MatDialogRef,
+          useFactory: () => null
+        },
+        {
+          provide: MAT_DIALOG_DATA,
+          useFactory: () => null
+        },
         {
           provide: 'personService',
           deps: [HttpClient],

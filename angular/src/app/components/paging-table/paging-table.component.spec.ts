@@ -6,8 +6,9 @@ import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {MatSortModule} from '@angular/material/sort';
+import {MatIconModule} from '@angular/material/icon';
 
-describe('PagingRestTableComponent', () => {
+describe('PagingTableComponent', () => {
   let component: PagingTableComponent<unknown>;
   let fixture: ComponentFixture<PagingTableComponent<unknown>>;
 
@@ -15,6 +16,7 @@ describe('PagingRestTableComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ PagingTableComponent ],
       imports: [
+        MatIconModule,
         MatPaginatorModule,
         MatProgressSpinnerModule,
         MatSortModule,
