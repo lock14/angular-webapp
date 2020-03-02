@@ -28,6 +28,7 @@ import {Address} from './models/address';
 import {MAT_DIALOG_DATA, MatDialogModule, MatDialogRef} from '@angular/material/dialog';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {ModalFormComponent} from './components/modal-form/modal-form.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     NavComponent,
     PeopleComponent,
     PagingTableComponent,
-    PersonFormComponent
+    ModalFormComponent
   ],
   imports: [
     AppRoutingModule,
@@ -60,7 +61,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatCheckboxModule
   ],
   entryComponents: [
-    PersonFormComponent
+    ModalFormComponent
   ],
   providers: [
 

@@ -1,7 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { PeopleComponent } from './people.component';
-import {PersonFormComponent} from '../../components/person-form/person-form.component';
+import {PeopleComponent} from './people.component';
 import {PagingTableComponent} from '../../components/paging-table/paging-table.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatTableModule} from '@angular/material/table';
@@ -13,8 +12,9 @@ import {PagingRestService} from '../../services/paging-rest.service';
 import {Person} from '../../models/person';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {MatInputModule} from '@angular/material/input';
-import {BrowserAnimationsModule, NoopAnimationsModule} from '@angular/platform-browser/animations';
+import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {MatSortModule} from '@angular/material/sort';
+import {ModalFormComponent} from '../../components/modal-form/modal-form.component';
 
 describe('PersonComponent', () => {
   let component: PeopleComponent;
@@ -25,7 +25,7 @@ describe('PersonComponent', () => {
       declarations: [
         PagingTableComponent,
         PeopleComponent,
-        PersonFormComponent
+        ModalFormComponent
       ],
       imports: [
         NoopAnimationsModule,

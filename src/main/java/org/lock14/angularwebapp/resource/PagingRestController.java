@@ -1,8 +1,5 @@
 package org.lock14.angularwebapp.resource;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectReader;
 import org.lock14.angularwebapp.api.Page;
 import org.lock14.angularwebapp.service.PagingRestService;
 import org.springframework.data.domain.Pageable;
@@ -14,7 +11,6 @@ import org.springframework.util.ReflectionUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -23,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
-import java.io.IOException;
 import java.lang.reflect.Method;
 
 @Validated
@@ -75,10 +70,9 @@ public abstract class PagingRestController<T, ID> {
 
     private void setId(T t, ID id) {
         Class<?> tClass = t.getClass();
-        ReflectionUtils.findMethod(tClass, "setId");
-        Method setId = ReflectionUtils.findMethod(tClass, "setId");
+        Method setId = ReflectionUtils.findMethod(tClass, "setId", id.getClass());
         if (setId != null) {
-            ReflectionUtils.invokeMethod(setId, tClass, id);
+            ReflectionUtils.invokeMethod(setId, t, id);
         } else {
             throw new IllegalStateException(String.format("%s does not have a method 'setId()'", tClass.getName()));
         }

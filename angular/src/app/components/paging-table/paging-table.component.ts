@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, EventEmitter, Input, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator, MatSort} from '@angular/material';
-import {merge, of} from 'rxjs';
+import {merge, Observable, of} from 'rxjs';
 import {map, switchMap} from 'rxjs/operators';
 import {Direction} from '../../models/direction';
 import {Sort} from '@angular/material/sort';
@@ -10,6 +10,7 @@ import {SearchCriteria} from '../../models/search-criteria';
 import {PagingService} from '../../services/paging-service';
 import {error} from 'util';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {FieldDefinition} from '../../models/field-definition';
 
 @Component({
   selector: 'app-paging-rest-table',
@@ -18,8 +19,9 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 })
 export class PagingTableComponent<T> implements OnInit, AfterViewInit {
   @Input() pagingService: PagingService<T> = null;
-  @Input() columns: any[];
+  @Input() columns: FieldDefinition[];
   @Input() snackBar: MatSnackBar;
+  @Input() editCallBack: (val: any) => Observable<any> = row => of(row);
 
   displayedColumns: string[] = [];
   totalElements = 0;
@@ -36,7 +38,7 @@ export class PagingTableComponent<T> implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.columns.map(column => column.field)
+    this.columns.map(column => column.name)
       .forEach(field => this.displayedColumns.push(field));
     this.displayedColumns.push('edit');
     this.displayedColumns.push('delete');
@@ -128,6 +130,17 @@ export class PagingTableComponent<T> implements OnInit, AfterViewInit {
     } else {
       return 'block';
     }
+  }
+
+  edit(row) {
+    this.editCallBack(row)
+      .subscribe(
+        resp => {
+          this.search(this.searchCriteria);
+          this.snackBar.open('Update Successful', 'OK');
+        },
+        err => this.snackBar.open('Error', 'OK')
+      );
   }
 
   delete(id: string | number) {

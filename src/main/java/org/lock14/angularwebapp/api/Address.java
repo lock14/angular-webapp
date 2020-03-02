@@ -80,7 +80,7 @@ public class Address {
 
     @Override
     public String toString() {
-        return "ApiAddress{" +
+        return "Address{" +
                "id=" + id +
                ", streetAddress='" + streetAddress + '\'' +
                ", city='" + city + '\'' +

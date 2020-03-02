@@ -66,7 +66,7 @@ public class Person {
 
     @Override
     public String toString() {
-        return "ApiPerson{" +
+        return "Person{" +
                "id=" + id +
                ", firstName='" + firstName + '\'' +
                ", lastName='" + lastName + '\'' +

@@ -1,10 +1,12 @@
 <div class="page-flex">
-  <app-person-form class="flex-item" [submitText]="'Search'" (personEmitter)="search($event)"
-                   [title]="'Search People'">
-  </app-person-form>
+  <app-modal-form class="flex-item" [submitText]="'Search'" (modelEmitter)="search($event)"
+                   [title]="'Search People'" [fieldDefinitions]="fieldDefinitions"
+  [hidden]="['addressId']" [disabled]="['addressId']">
+  </app-modal-form>
   <p class="flex-spacer"></p>
   <button mat-raised-button color="primary" (click)="add()">Add</button>
   <p class="flex-spacer"></p>
-  <app-paging-rest-table class="flex-item" [pagingService]="personService" [columns]="columns" [snackBar]="snackBar">
+  <app-paging-rest-table class="flex-item" [pagingService]="personService"
+                         [columns]="fieldDefinitions" [snackBar]="snackBar" [editCallBack]="this.editFn()">
   </app-paging-rest-table>
 </div>

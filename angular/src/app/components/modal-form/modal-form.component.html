@@ -1,0 +1,22 @@
+<h2 mat-dialog-title>
+  {{title}}
+  <button *ngIf="this.dialogRef" style="float: right" (click)="close()"
+          class="item" mat-button>close
+  </button>
+</h2>
+<mat-dialog-content [formGroup]="form">
+  <ng-container *ngFor="let fieldDefinition of fieldDefinitions">
+    <mat-form-field class="full-width" [style.display]="display(fieldDefinition.name)">
+      <input matInput [formControlName]="fieldDefinition.name"
+             [placeholder]="fieldDefinition.displayName"
+             [type]="fieldDefinition.inputType"
+             [attr.disabled]="''">
+    </mat-form-field>
+  </ng-container>
+</mat-dialog-content>
+<mat-dialog-actions class="button-group">
+  <button (click)="clear()" class="item" mat-raised-button color="primary">clear</button>
+  <span class="spacer"></span>
+  <button (click)="submit()" [disabled]="!this.form.valid"
+          type="submit" class="item" mat-raised-button color="primary">{{submitText}}</button>
+</mat-dialog-actions>
