@@ -1,6 +1,6 @@
 package org.lock14.angularwebapp.api;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 import java.util.Objects;
 
 public class Person {

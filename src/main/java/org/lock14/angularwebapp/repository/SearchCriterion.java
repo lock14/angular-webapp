@@ -2,8 +2,8 @@ package org.lock14.angularwebapp.repository;
 
 import org.springframework.data.jpa.domain.Specification;
 
-import javax.persistence.criteria.Path;
-import javax.persistence.metamodel.SingularAttribute;
+import jakarta.persistence.criteria.Path;
+import jakarta.persistence.metamodel.SingularAttribute;
 import java.util.Collection;
 
 public final class SearchCriterion {

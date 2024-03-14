@@ -17,13 +17,13 @@ public class RestControllerExceptionHandler {
     @ExceptionHandler(HttpClientErrorException.class)
     public ResponseEntity<Error> handleHttpClientError(HttpRequest request,
                                                        HttpClientErrorException ex) {
-        return errorResponse(request, ex.getStatusCode(), ex.getResponseBodyAsString());
+        return errorResponse(request, HttpStatus.resolve(ex.getStatusCode().value()), ex.getResponseBodyAsString());
     }
 
     @ExceptionHandler(HttpServerErrorException.class)
     public ResponseEntity<Error> handleHttpServerError(HttpRequest request,
                                                        HttpServerErrorException ex) {
-        return errorResponse(request, ex.getStatusCode(), ex.getResponseBodyAsString());
+        return errorResponse(request, HttpStatus.resolve(ex.getStatusCode().value()), ex.getResponseBodyAsString());
     }
 
     private ResponseEntity<Error> errorResponse(HttpRequest request, HttpStatus status, String message) {

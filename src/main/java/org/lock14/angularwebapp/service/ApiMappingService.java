@@ -4,12 +4,13 @@ import org.lock14.angularwebapp.mapper.ApiMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.util.MultiValueMap;
 
 import java.util.Optional;
 
-public abstract class ApiMappingService<Repo extends PagingAndSortingRepository<Entity, Id> & JpaSpecificationExecutor<Entity>,
+public abstract class ApiMappingService<Repo extends CrudRepository<Entity, Id> & PagingAndSortingRepository<Entity, Id> & JpaSpecificationExecutor<Entity>,
         ApiResource, Entity, Id> implements PagingRestService<ApiResource, Id> {
 
     private Repo repository;
