@@ -10,7 +10,7 @@ public class WebConfiguration implements WebMvcConfigurer {
     public void addViewControllers(ViewControllerRegistry registry) {
         // send any unknown path that ends in a word to index.html
         // Angular will handle the route
-        registry.addViewController("/**/{spring:\\w+}")
+        registry.addViewController("/**/{page:\\w+}")
                 .setViewName("forward:/");
     }
 }
