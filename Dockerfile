@@ -1,5 +1,5 @@
 # Stage 1: Extract Spring Boot layers
-FROM eclipse-temurin:17-jre-alpine as builder
+FROM eclipse-temurin:25-jre-alpine as builder
 WORKDIR /builder
 # Expect the built jar file to be in the target directory
 ARG JAR_FILE=target/*.jar
@@ -8,7 +8,7 @@ COPY ${JAR_FILE} application.jar
 RUN java -Djarmode=layertools -jar application.jar extract
 
 # Stage 2: Create the optimized production image
-FROM eclipse-temurin:17-jre-alpine
+FROM eclipse-temurin:25-jre-alpine
 WORKDIR /application
 
 # Best Practice: Run as a non-root user for security
