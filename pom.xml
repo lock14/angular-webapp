@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.2.3</version>
+        <version>3.5.14</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>org.lock14</groupId>
@@ -15,7 +15,7 @@
     <description>Demo project for Angular + Spring Boot</description>
 
     <properties>
-        <java.version>17</java.version>
+        <java.version>25</java.version>
         <node.version>v12.13.1</node.version>
         <mapstruct.version>1.5.5.Final</mapstruct.version>
         <docker.image.prefix/>
